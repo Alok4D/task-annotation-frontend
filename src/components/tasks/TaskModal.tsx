@@ -90,10 +90,10 @@ export const TaskModal = ({ isOpen, onClose, task }: TaskModalProps) => {
         
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">Priority</label>
+            <label className="text-[11px] font-bold text-[#8B929D] uppercase tracking-wide">Priority</label>
             <select
               {...register('priority')}
-              className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+              className="flex h-10 w-full rounded border border-[#3A414B] bg-[#1E2228] px-3 py-2 text-sm text-white focus:outline-none focus:border-[#0D73ED] transition-colors"
             >
               <option value="LOW">Low</option>
               <option value="MEDIUM">Medium</option>
@@ -102,10 +102,10 @@ export const TaskModal = ({ isOpen, onClose, task }: TaskModalProps) => {
           </div>
           
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">Status</label>
+            <label className="text-[11px] font-bold text-[#8B929D] uppercase tracking-wide">Status</label>
             <select
               {...register('status')}
-              className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+              className="flex h-10 w-full rounded border border-[#3A414B] bg-[#1E2228] px-3 py-2 text-sm text-white focus:outline-none focus:border-[#0D73ED] transition-colors"
             >
               <option value="TODO">To Do</option>
               <option value="IN_PROGRESS">In Progress</option>
@@ -127,7 +127,7 @@ export const TaskModal = ({ isOpen, onClose, task }: TaskModalProps) => {
           {...register('tags')}
         />
 
-        <div className="flex gap-3 pt-4 mt-2 border-t border-gray-100">
+        <div className="flex gap-3 pt-4 mt-2 border-t border-[#3A414B]">
           {task && (
             <Button
               type="button"

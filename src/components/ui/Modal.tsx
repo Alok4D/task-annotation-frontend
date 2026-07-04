@@ -18,12 +18,12 @@ export const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col max-h-[90vh]">
-        <div className="flex justify-between items-center p-4 border-b border-gray-100">
-          <h2 className="font-bold text-lg text-gray-800">{title}</h2>
-          <button onClick={onClose} className="p-1 rounded-full hover:bg-gray-100 transition-colors">
-            <X className="w-5 h-5 text-gray-500" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="bg-[#272B33] rounded shadow-xl w-full max-w-md overflow-hidden flex flex-col max-h-[90vh] border border-[#3A414B]">
+        <div className="flex justify-between items-center p-4 border-b border-[#3A414B]">
+          <h2 className="font-bold text-lg text-white">{title}</h2>
+          <button onClick={onClose} className="p-1 rounded hover:bg-[#323842] transition-colors">
+            <X className="w-5 h-5 text-[#8B929D]" />
           </button>
         </div>
         <div className="p-4 overflow-y-auto">

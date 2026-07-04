@@ -12,7 +12,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="space-y-2 w-full">
         {label && (
-          <label htmlFor={inputId} className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700">
+          <label htmlFor={inputId} className="text-[11px] font-bold text-[#8B929D] uppercase tracking-wide">
             {label}
           </label>
         )}
@@ -20,8 +20,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           id={inputId}
           ref={ref}
           className={cn(
-            'flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50 transition-shadow',
-            error && 'border-red-500 focus:ring-red-500',
+            'flex h-10 w-full rounded border border-[#3A414B] bg-transparent px-3 py-2 text-sm text-white placeholder:text-[#5c6370] focus:outline-none focus:border-[#0D73ED] disabled:cursor-not-allowed disabled:opacity-50 transition-colors',
+            error && 'border-red-500 focus:border-red-500',
             className
           )}
           {...props}

@@ -35,47 +35,47 @@ export default function TasksPage() {
   const isToday = new Date().toISOString().split('T')[0] === selectedDateStr;
 
   return (
-    <div className="h-full flex flex-col gap-6 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="flex justify-between items-end bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+    <div className="h-full flex flex-col gap-6 w-full animate-in fade-in slide-in-from-bottom-4 duration-500 font-sans">
+      <div className="flex justify-between items-end bg-[#272B33] p-6 rounded shadow-sm border border-[#3A414B]">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
               📅 {formatDateForDisplay(selectedDate)}
             </h1>
             {isToday && (
-              <span className="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-0.5 rounded-md border border-blue-200">
+              <span className="bg-[#0D73ED]/20 text-[#0D73ED] text-xs font-bold px-2.5 py-0.5 rounded border border-[#0D73ED]/30">
                 Today
               </span>
             )}
           </div>
-          <p className="text-gray-500 text-sm mt-2 font-medium">
+          <p className="text-[#8B929D] text-sm mt-2 font-medium">
             Showing {tasks.length} {tasks.length === 1 ? 'Task' : 'Tasks'}
           </p>
         </div>
         
         <div className="flex items-center gap-4">
           <DateSelector />
-          <Button onClick={handleCreateNew} className="gap-2 shadow-md">
+          <button onClick={handleCreateNew} className="h-10 px-4 bg-[#0D73ED] hover:bg-[#0b62cc] text-white font-bold text-sm rounded transition-colors flex items-center gap-2">
             <Plus className="w-5 h-5" />
             New Task
-          </Button>
+          </button>
         </div>
       </div>
 
-      <div className="flex-1 min-h-0 bg-transparent rounded-2xl">
+      <div className="flex-1 min-h-0 bg-transparent rounded">
         {tasks.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center bg-white rounded-2xl border border-dashed border-gray-300">
-            <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mb-4">
+          <div className="h-full flex flex-col items-center justify-center bg-[#272B33] rounded border border-dashed border-[#3A414B]">
+            <div className="w-16 h-16 bg-[#1F242B] text-[#8B929D] rounded-full flex items-center justify-center mb-4">
               <CalendarIcon className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-2">No tasks for this date.</h3>
-            <p className="text-gray-500 mb-6 max-w-md text-center">
+            <h3 className="text-xl font-bold text-white mb-2">No tasks for this date.</h3>
+            <p className="text-[#8B929D] mb-6 max-w-md text-center text-sm">
               You have a clear schedule for {formatDateForDisplay(selectedDate)}. Enjoy your free time or add a new task to stay productive!
             </p>
-            <Button onClick={handleCreateNew} className="gap-2 shadow-md">
+            <button onClick={handleCreateNew} className="h-10 px-4 bg-[#0D73ED] hover:bg-[#0b62cc] text-white font-bold text-sm rounded transition-colors flex items-center gap-2">
               <Plus className="w-5 h-5" />
               Create Task
-            </Button>
+            </button>
           </div>
         ) : (
           <Board onEditTask={handleEditTask} />
