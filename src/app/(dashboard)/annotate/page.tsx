@@ -5,8 +5,8 @@ import { AnnotationSidebar } from '@/components/annotation/AnnotationSidebar';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store';
 import { setSelectedImageId } from '@/features/annotations/annotationSlice';
-import { useGetImagesQuery, useUploadImageMutation } from '@/features/annotations/annotationApi';
-import { Upload, Image as ImageIcon, Plus } from 'lucide-react';
+import { useGetImagesQuery, useUploadImageMutation, useDeleteImageMutation } from '@/features/annotations/annotationApi';
+import { Upload, Image as ImageIcon, Plus, X } from 'lucide-react';
 import { Spinner } from '@/components/ui/Spinner';
 
 export default function AnnotatePage() {
@@ -14,6 +14,7 @@ export default function AnnotatePage() {
   const selectedImageId = useSelector((state: RootState) => state.annotations.selectedImageId);
   const { data: images = [], isLoading: imagesLoading } = useGetImagesQuery();
   const [uploadImage, { isLoading: isUploading }] = useUploadImageMutation();
+  const [deleteImage] = useDeleteImageMutation();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Auto-select first image if none is selected
@@ -120,6 +121,17 @@ export default function AnnotatePage() {
                   {selectedImageId === img.id && (
                     <div className="absolute inset-0 bg-blue-600/10"></div>
                   )}
+                  <button 
+                    onClick={(e) => { 
+                      e.stopPropagation(); 
+                      deleteImage(img.id);
+                      if (selectedImageId === img.id) dispatch(setSelectedImageId(null));
+                    }}
+                    className="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-all shadow-sm"
+                    title="Delete Image"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
                 </div>
               ))}
             </div>

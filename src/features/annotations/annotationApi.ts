@@ -17,6 +17,13 @@ export const annotationApi = apiWithTags.injectEndpoints({
       }),
       invalidatesTags: ['Image'],
     }),
+    deleteImage: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `annotations/images/${id}/`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Image'],
+    }),
     // We fetch all annotations and will filter them by imageId on the frontend just to be safe
     getAnnotations: builder.query<Annotation[], void>({
       query: () => 'annotations/annotations/',
@@ -46,4 +53,5 @@ export const {
   useGetAnnotationsQuery,
   useSaveAnnotationMutation,
   useDeleteAnnotationMutation,
+  useDeleteImageMutation,
 } = annotationApi;
