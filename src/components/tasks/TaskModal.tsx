@@ -93,7 +93,7 @@ export const TaskModal = ({ isOpen, onClose, task }: TaskModalProps) => {
             <label className="text-[11px] font-bold text-[#8B929D] uppercase tracking-wide">Priority</label>
             <select
               {...register('priority')}
-              className="flex h-10 w-full rounded border border-[#3A414B] bg-[#1E2228] px-3 py-2 text-sm text-white focus:outline-none focus:border-[#0D73ED] transition-colors"
+              className="flex h-10 w-full rounded border border-[#3A414B] bg-[#1E2228] px-3 py-2 text-sm text-white focus:outline-none focus:border-[#0D73ED] transition-colors [color-scheme:dark]"
             >
               <option value="LOW">Low</option>
               <option value="MEDIUM">Medium</option>
@@ -105,7 +105,7 @@ export const TaskModal = ({ isOpen, onClose, task }: TaskModalProps) => {
             <label className="text-[11px] font-bold text-[#8B929D] uppercase tracking-wide">Status</label>
             <select
               {...register('status')}
-              className="flex h-10 w-full rounded border border-[#3A414B] bg-[#1E2228] px-3 py-2 text-sm text-white focus:outline-none focus:border-[#0D73ED] transition-colors"
+              className="flex h-10 w-full rounded border border-[#3A414B] bg-[#1E2228] px-3 py-2 text-sm text-white focus:outline-none focus:border-[#0D73ED] transition-colors [color-scheme:dark]"
             >
               <option value="TODO">To Do</option>
               <option value="IN_PROGRESS">In Progress</option>
@@ -139,7 +139,7 @@ export const TaskModal = ({ isOpen, onClose, task }: TaskModalProps) => {
               Delete
             </Button>
           )}
-          <Button type="button" variant="ghost" onClick={onClose}>
+          <Button type="button" variant="secondary" onClick={onClose}>
             Cancel
           </Button>
           <Button type="submit" isLoading={isLoading}>
