@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '@/features/auth/authApi';
 import { setCredentials } from '@/features/auth/authSlice';
 import Link from 'next/link';
-import { Spinner } from '@/components/ui/Spinner';
 import { cn } from '@/utils/cn';
 
 const loginSchema = z.object({
