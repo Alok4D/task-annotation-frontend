@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store';
 import { setSelectedImageId } from '@/features/annotations/annotationSlice';
 import { useGetImagesQuery, useUploadImageMutation } from '@/features/annotations/annotationApi';
-import { Upload, Image as ImageIcon } from 'lucide-react';
+import { Upload, Image as ImageIcon, Plus } from 'lucide-react';
 import { Spinner } from '@/components/ui/Spinner';
 
 export default function AnnotatePage() {
@@ -33,7 +33,7 @@ export default function AnnotatePage() {
           formData.append('image', file);
           try {
             const res = await uploadImage(formData).unwrap();
-            dispatch(setSelectedImageId(res.id)); // Auto select the new image
+            dispatch(setSelectedImageId(res.id));
           } catch (error) {
             console.error("Upload failed", error);
           }
@@ -43,12 +43,14 @@ export default function AnnotatePage() {
   };
 
   return (
-    <div className="h-full flex flex-col gap-4 animate-in fade-in zoom-in-95 duration-300 w-full p-4">
-      {/* Top Bar - Upload */}
-      <div className="w-full flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
-        <div>
-          <h2 className="text-xl font-bold text-gray-800">Image Annotation</h2>
-          <p className="text-sm text-gray-500">Upload images and draw polygons.</p>
+    <div className="h-[calc(100vh-120px)] flex flex-col bg-[#F8F9FA] w-full relative overflow-hidden font-sans rounded-2xl shadow-sm border border-gray-200">
+      {/* Sleek Top Header */}
+      <header className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0 z-20">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold shadow-sm shadow-blue-600/20">
+            A
+          </div>
+          <h2 className="text-sm font-bold text-gray-800 tracking-tight">Annotation Workspace</h2>
         </div>
         
         <div>
@@ -63,50 +65,67 @@ export default function AnnotatePage() {
           <button 
             onClick={() => fileInputRef.current?.click()}
             disabled={isUploading}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-semibold flex items-center gap-2 transition-colors shadow-sm disabled:opacity-70"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm shadow-blue-600/20 disabled:opacity-70 active:scale-95"
           >
-            {isUploading ? <Spinner className="w-4 h-4 text-white" /> : <Upload className="w-4 h-4" />}
-            {isUploading ? 'Uploading...' : 'Upload Image(s)'}
+            {isUploading ? <Spinner className="w-3.5 h-3.5 text-white" /> : <Plus className="w-3.5 h-3.5" />}
+            {isUploading ? 'Uploading...' : 'Add Images'}
           </button>
         </div>
-      </div>
+      </header>
 
-      {/* Main Workspace */}
-      <div className="flex-1 flex gap-4 min-h-0 relative">
+      {/* Main Workspace (Canvas + Sidebar) */}
+      <div className="flex-1 flex min-h-0 relative">
         {images.length === 0 && !imagesLoading ? (
-           <div className="flex-1 bg-white rounded-2xl border border-gray-100 flex flex-col items-center justify-center shadow-sm">
-             <ImageIcon className="w-16 h-16 text-gray-200 mb-4" />
-             <h3 className="text-lg font-bold text-gray-700">No images uploaded yet</h3>
-             <p className="text-gray-500 text-sm">Click the upload button above to start annotating.</p>
+           <div className="flex-1 flex flex-col items-center justify-center">
+             <div className="w-20 h-20 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-6">
+                <ImageIcon className="w-8 h-8 text-blue-500" />
+             </div>
+             <h3 className="text-xl font-bold text-gray-800 mb-2">Ready to Annotate</h3>
+             <p className="text-gray-500 text-sm max-w-sm text-center mb-6">Upload some images to start drawing polygons and marking up your files.</p>
+             <button 
+                onClick={() => fileInputRef.current?.click()}
+                className="bg-white border border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-sm active:scale-95"
+              >
+                Upload from Computer
+              </button>
            </div>
         ) : (
            <>
+             {/* Canvas Area takes full space */}
              <Canvas />
-             <AnnotationSidebar />
+             {/* Right Sidebar floats over or takes space? Figma has it taking space on right. */}
+             <div className="w-72 bg-white border-l border-gray-200 shadow-xl z-10 flex flex-col">
+               <AnnotationSidebar />
+             </div>
            </>
         )}
-      </div>
 
-      {/* Bottom Slider / Gallery */}
-      {images.length > 0 && (
-        <div className="h-28 bg-white rounded-2xl shadow-sm border border-gray-100 p-3 overflow-x-auto flex items-center gap-3 snap-x">
-          {imagesLoading && <Spinner className="w-6 h-6 text-blue-600 mx-auto" />}
-          
-          {images.map(img => (
-            <div 
-              key={img.id}
-              onClick={() => dispatch(setSelectedImageId(img.id))}
-              className={`h-full aspect-video flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 transition-all snap-start ${selectedImageId === img.id ? 'border-blue-600 shadow-md ring-4 ring-blue-50' : 'border-transparent hover:border-gray-300 opacity-70 hover:opacity-100'}`}
-            >
-              <img 
-                src={img.image.startsWith('http') ? img.image : `http://127.0.0.1:8000${img.image}`} 
-                alt="Thumbnail" 
-                className="w-full h-full object-cover"
-              />
+        {/* Floating Bottom Dock for Thumbnails */}
+        {images.length > 0 && (
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+            <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl border border-white/50 p-2 flex items-center gap-2 max-w-[80vw] overflow-x-auto snap-x">
+              {imagesLoading && <Spinner className="w-5 h-5 text-blue-600 mx-4" />}
+              
+              {images.map(img => (
+                <div 
+                  key={img.id}
+                  onClick={() => dispatch(setSelectedImageId(img.id))}
+                  className={`h-16 aspect-video flex-shrink-0 rounded-xl overflow-hidden cursor-pointer transition-all snap-start group relative ${selectedImageId === img.id ? 'ring-2 ring-blue-600 ring-offset-2 scale-105 mx-2' : 'hover:scale-105 opacity-70 hover:opacity-100 mx-1'}`}
+                >
+                  <img 
+                    src={img.image.startsWith('http') ? img.image : `http://127.0.0.1:8000${img.image}`} 
+                    alt="Thumbnail" 
+                    className="w-full h-full object-cover"
+                  />
+                  {selectedImageId === img.id && (
+                    <div className="absolute inset-0 bg-blue-600/10"></div>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

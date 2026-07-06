@@ -20,8 +20,8 @@ export const AnnotationSidebar = () => {
   };
 
   return (
-    <div className="w-80 bg-white rounded-2xl border border-gray-100 flex flex-col shadow-sm">
-      <div className="p-4 border-b border-gray-100 bg-gray-50/50 rounded-t-2xl flex items-center gap-2">
+    <div className="flex-1 bg-white flex flex-col w-full h-full">
+      <div className="p-5 border-b border-gray-100 flex items-center gap-2">
         <Shapes className="w-5 h-5 text-blue-600" />
         <h3 className="font-bold text-gray-800">Saved Polygons</h3>
       </div>

@@ -113,7 +113,10 @@ export const Canvas = () => {
   const baseScale = image && image.width > 800 ? 800 / image.width : 1;
 
   return (
-    <div className="flex-1 bg-[#282828] rounded-2xl border border-[#111] overflow-hidden flex flex-col relative">
+    <div 
+      className="flex-1 bg-gray-50/50 overflow-hidden relative flex items-center justify-center shadow-inner"
+      style={{ backgroundImage: 'radial-gradient(#CBD5E1 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}
+    >
       <Toolbar 
         activeTool={activeTool} 
         onToolChange={setActiveTool}
@@ -126,12 +129,12 @@ export const Canvas = () => {
         onDelete={() => { setPoints([]); setIsFinished(false); }}
         canDelete={points.length > 0}
         onSave={handleSave}
-        canSave={isFinished && points.length > 2 && !isSaving}
+        canSave={points.length > 2 && !isSaving}
       />
       
-      <div className="flex-1 overflow-hidden flex justify-center items-center p-4 relative">
+      <div className="absolute inset-0 flex justify-center items-center overflow-hidden">
         {image ? (
-          <div className={`shadow-2xl overflow-hidden bg-white ${activeTool === 'DRAW' ? 'cursor-crosshair' : activeTool === 'PAN' ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}>
+          <div className={`shadow-xl bg-white border border-gray-200 transition-shadow hover:shadow-2xl ${activeTool === 'DRAW' ? 'cursor-crosshair' : activeTool === 'PAN' ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}>
             <Stage
               width={image.width * baseScale}
               height={image.height * baseScale}
