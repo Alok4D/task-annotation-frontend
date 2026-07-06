@@ -17,10 +17,14 @@ const registerSchema = z.object({
   name: z.string().min(2, 'Name is required'),
   email: z.string().email('Please enter a valid email address'),
   password: z.string().min(8, 'Use 8 or more characters'),
+  password_confirm: z.string().min(1, 'Confirm your password'),
   agreeTerms: z.boolean().refine(val => val === true, {
     message: 'You must agree to the Terms and Privacy Policy'
   }),
   subscribe: z.boolean().optional(),
+}).refine(data => data.password === data.password_confirm, {
+  message: "Passwords don't match",
+  path: ['password_confirm'],
 });
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
@@ -36,6 +40,7 @@ export default function RegisterPage() {
     handleSubmit,
     watch,
     setValue,
+    setError,
     formState: { errors },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -52,19 +57,35 @@ export default function RegisterPage() {
     setErrorMsg('');
     try {
       const response = await registerUser({
+        name: data.name,
         email: data.email,
         password: data.password,
+        password_confirm: data.password_confirm,
       }).unwrap();
       
       dispatch(
         setCredentials({
-          user: { id: 0, email: data.email, created_at: '' },
+          user: response.user || { id: 0, email: data.email, name: data.name, created_at: '' },
           token: response.access,
         })
       );
       router.push('/tasks');
     } catch (err: any) {
-      setErrorMsg(err?.data?.email?.[0] || err?.data?.detail || 'Registration failed. Please try again.');
+      if (err?.data && typeof err.data === 'object') {
+        let hasFieldError = false;
+        Object.keys(err.data).forEach((key) => {
+          if (key !== 'detail' && Array.isArray(err.data[key])) {
+            setError(key as keyof RegisterFormValues, { type: 'server', message: err.data[key][0] });
+            hasFieldError = true;
+          }
+        });
+
+        if (!hasFieldError) {
+          setErrorMsg(err.data.detail || 'Registration failed. Please try again.');
+        }
+      } else {
+        setErrorMsg('Registration failed. Please try again.');
+      }
     }
   };
 
@@ -117,7 +138,36 @@ export default function RegisterPage() {
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
           </div>
 
-    
+          <div>
+            <label className="block text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Confirm Password <span className="text-red-500">*</span></label>
+            <input 
+              type="password" 
+              {...register('password_confirm')}
+              className={cn(
+                "w-full h-11 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-3 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all",
+                errors.password_confirm && "border-red-500 focus:border-red-500 focus:ring-red-500"
+              )}
+            />
+            {errors.password_confirm && <p className="text-red-500 text-xs mt-1">{errors.password_confirm.message}</p>}
+          </div>
+
+          <div>
+            <label className="flex items-start gap-3 cursor-pointer group">
+              <div className="relative flex items-center justify-center mt-0.5">
+                <input 
+                  type="checkbox" 
+                  {...register('agreeTerms')}
+                  className="peer sr-only"
+                />
+                <div className="w-5 h-5 border-2 border-[#E5E7EB] rounded bg-white peer-checked:bg-[#673de6] peer-checked:border-[#673de6] transition-colors"></div>
+                <Check className="absolute text-white opacity-0 peer-checked:opacity-100 w-3.5 h-3.5 pointer-events-none" />
+              </div>
+              <div className="text-sm text-[#4B5563] leading-snug select-none">
+                I agree to the <Link href="#" className="text-[#673de6] font-semibold hover:underline">Terms of Service</Link> and <Link href="#" className="text-[#673de6] font-semibold hover:underline">Privacy Policy</Link>
+                {errors.agreeTerms && <p className="text-red-500 text-xs mt-1 block">{errors.agreeTerms.message}</p>}
+              </div>
+            </label>
+          </div>
 
           {errorMsg && (
             <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-100 font-medium">
