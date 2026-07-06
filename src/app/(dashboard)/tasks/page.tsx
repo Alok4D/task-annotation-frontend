@@ -11,6 +11,7 @@ import { RootState } from '@/store';
 import { useGetTasksQuery } from '@/features/tasks/taskApi';
 
 export default function TasksPage() {
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
@@ -36,41 +37,41 @@ export default function TasksPage() {
 
   return (
     <div className="h-full flex flex-col gap-6 w-full animate-in fade-in slide-in-from-bottom-4 duration-500 font-sans">
-      <div className="flex justify-between items-end bg-[#272B33] p-6 rounded shadow-sm border border-[#3A414B]">
+      <div className="flex justify-between items-end bg-white p-6 rounded-xl shadow-sm border border-[#E5E7EB]">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl font-black text-[#2F1C6A] tracking-tight flex items-center gap-2">
               📅 {formatDateForDisplay(selectedDate)}
             </h1>
             {isToday && (
-              <span className="bg-[#0D73ED]/20 text-[#0D73ED] text-xs font-bold px-2.5 py-0.5 rounded border border-[#0D73ED]/30">
+              <span className="bg-[#f3effe] text-[#673de6] text-xs font-bold px-2.5 py-0.5 rounded-full border border-[#d6c7ff]">
                 Today
               </span>
             )}
           </div>
-          <p className="text-[#8B929D] text-sm mt-2 font-medium">
+          <p className="text-[#6B7280] text-sm mt-2 font-medium">
             Showing {tasks.length} {tasks.length === 1 ? 'Task' : 'Tasks'}
           </p>
         </div>
         
         <div className="flex items-center gap-4">
           <DateSelector />
-          <button onClick={handleCreateNew} className="h-10 px-4 bg-[#0D73ED] hover:bg-[#0b62cc] text-white font-bold text-sm rounded transition-colors flex items-center gap-2">
+          <button onClick={handleCreateNew} className="h-11 px-5 bg-[#673de6] hover:bg-[#532cc2] text-white font-bold text-sm rounded-full transition-colors flex items-center gap-2 shadow-sm">
             <Plus className="w-5 h-5" />
             New Task
           </button>
         </div>
       </div>
 
-      <div className="flex-1 min-h-0 bg-transparent rounded mt-6">
+      <div className="flex-1 min-h-0 bg-transparent rounded-xl mt-6">
         {tasks.length === 0 ? (
           <div className="w-full h-full flex flex-col items-center justify-center">
-            <div className="flex flex-col items-center justify-center bg-transparent rounded border border-dashed border-[#3A414B] p-12 w-full max-w-lg">
-            <div className="w-16 h-16 bg-[#272B33] text-[#8B929D] rounded-full flex items-center justify-center mb-4">
+            <div className="flex flex-col items-center justify-center bg-white rounded-2xl border border-dashed border-[#CBD5E1] p-12 w-full max-w-lg shadow-sm">
+            <div className="w-16 h-16 bg-[#F4F5F7] text-[#6B7280] rounded-full flex items-center justify-center mb-4">
               <CalendarIcon className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">No tasks for this date.</h3>
-            <p className="text-[#8B929D] text-center text-sm">
+            <h3 className="text-xl font-black text-[#2F1C6A] mb-2">No tasks for this date.</h3>
+            <p className="text-[#6B7280] text-center text-sm">
               You have a clear schedule for {formatDateForDisplay(selectedDate)}. Enjoy your free time or add a new task from the top right to stay productive!
             </p>
           </div>

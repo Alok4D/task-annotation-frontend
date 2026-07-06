@@ -69,55 +69,58 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#20242B] font-sans p-4">
-      <div className="w-full max-w-[420px] bg-[#272B33] p-10 shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-[#F4F5F7] font-sans p-4">
+      <div className="w-full max-w-[420px] bg-white p-10 shadow-lg rounded-2xl border border-[#E5E7EB]">
         
         <div className="flex justify-center mb-8">
-          <h1 className="text-[22px] font-bold text-white tracking-wide">Sign Up Free</h1>
+          <h1 className="text-[28px] font-black text-[#2F1C6A] tracking-tight">Sign Up Free</h1>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div>
-            <label className="block text-[11px] font-bold text-[#8B929D] mb-1.5 uppercase tracking-wide">
-              Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
+            <label className="block text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Name <span className="text-red-500">*</span></label>
+            <input 
+              type="text" 
               {...register('name')}
-              className="w-full h-10 bg-transparent border border-[#3A414B] focus:border-[#0D73ED] rounded outline-none px-3 text-sm text-white transition-colors"
+              className={cn(
+                "w-full h-11 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-3 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all",
+                errors.name && "border-red-500 focus:border-red-500 focus:ring-red-500"
+              )}
             />
             {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
           </div>
 
           <div>
-            <label className="block text-[11px] font-bold text-[#8B929D] mb-1.5 uppercase tracking-wide">
-              Email <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
+            <label className="block text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Email <span className="text-red-500">*</span></label>
+            <input 
+              type="email" 
               {...register('email')}
-              className="w-full h-10 bg-transparent border border-[#3A414B] focus:border-[#0D73ED] rounded outline-none px-3 text-sm text-white transition-colors"
+              className={cn(
+                "w-full h-11 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-3 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all",
+                errors.email && "border-red-500 focus:border-red-500 focus:ring-red-500"
+              )}
             />
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
           </div>
 
           <div>
-            <label className="block text-[11px] font-bold text-[#8B929D] mb-1.5 uppercase tracking-wide">
-              Password <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="password"
+            <label className="block text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Password <span className="text-red-500">*</span></label>
+            <input 
+              type="password" 
               {...register('password')}
-              className="w-full h-10 bg-transparent border border-[#3A414B] focus:border-[#0D73ED] rounded outline-none px-3 text-sm text-white transition-colors mb-1"
+              className={cn(
+                "w-full h-11 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-3 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all",
+                errors.password && "border-red-500 focus:border-red-500 focus:ring-red-500"
+              )}
             />
-            <p className="text-[11px] text-[#8B929D]">Use 8 or more characters.</p>
+            <p className="text-xs text-[#6B7280] mt-1.5">Use 8 or more characters.</p>
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
           </div>
 
     
 
           {errorMsg && (
-            <div className="p-3 bg-red-500/10 text-red-500 text-sm rounded border border-red-500/20 font-medium">
+            <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-100 font-medium">
               {errorMsg}
             </div>
           )}
@@ -125,15 +128,15 @@ export default function RegisterPage() {
           <button 
             type="submit" 
             disabled={isLoading}
-            className="w-full h-[42px] bg-[#00BFA5] hover:bg-[#00a891] text-white font-bold text-sm rounded transition-colors flex justify-center items-center gap-2 mt-4"
+            className="w-full h-11 bg-[#673de6] hover:bg-[#532cc2] text-white font-bold rounded-lg transition-colors flex items-center justify-center shadow-sm disabled:opacity-70 mt-4"
           >
-            {isLoading ? <Spinner className="w-4 h-4 text-white" /> : 'Sign Up'}
+            {isLoading ? 'Signing up...' : 'Sign Up'}
           </button>
         </form>
 
-        <div className="mt-8 text-center">
-          <p className="text-xs text-[#8B929D]">
-            Already have an account? <Link href="/login" className="text-[#0D73ED] hover:underline font-semibold">Log In</Link>
+        <div className="mt-8 pt-6 border-t border-[#E5E7EB] text-center">
+          <p className="text-[13px] text-[#6B7280]">
+            Already have an account? <Link href="/login" className="text-[#673de6] hover:underline font-bold">Log In</Link>
           </p>
         </div>
       </div>

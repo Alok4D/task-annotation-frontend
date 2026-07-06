@@ -3,9 +3,9 @@ import { cn } from '@/utils/cn';
 
 export const PriorityBadge = ({ priority }: { priority: TaskPriority }) => {
   const styles = {
-    LOW: 'bg-[#1E2228] text-green-400 border-green-500/30',
-    MEDIUM: 'bg-[#1E2228] text-yellow-400 border-yellow-500/30',
-    HIGH: 'bg-[#1E2228] text-red-400 border-red-500/30',
+    LOW: 'bg-[#dcfce7] text-[#166534] border-[#bbf7d0]',
+    MEDIUM: 'bg-[#fef9c3] text-[#854d0e] border-[#fef08a]',
+    HIGH: 'bg-[#fee2e2] text-[#991b1b] border-[#fecaca]',
   };
 
   return (

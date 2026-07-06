@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Modal } from '@/components/ui/Modal';
@@ -90,10 +90,10 @@ export const TaskModal = ({ isOpen, onClose, task }: TaskModalProps) => {
         
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Priority</label>
+            <label className="text-[11px] font-bold text-[#8B929D] uppercase tracking-wide">Priority</label>
             <select
               {...register('priority')}
-              className="flex h-11 w-full rounded-lg border border-[#E5E7EB] bg-[#F9FAFB] px-3 py-2 text-sm text-[#1F2937] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all"
+              className="flex h-10 w-full rounded border border-[#3A414B] bg-[#1E2228] px-3 py-2 text-sm text-white focus:outline-none focus:border-[#0D73ED] transition-colors [color-scheme:dark]"
             >
               <option value="LOW">Low</option>
               <option value="MEDIUM">Medium</option>
@@ -102,10 +102,10 @@ export const TaskModal = ({ isOpen, onClose, task }: TaskModalProps) => {
           </div>
           
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Status</label>
+            <label className="text-[11px] font-bold text-[#8B929D] uppercase tracking-wide">Status</label>
             <select
               {...register('status')}
-              className="flex h-11 w-full rounded-lg border border-[#E5E7EB] bg-[#F9FAFB] px-3 py-2 text-sm text-[#1F2937] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all"
+              className="flex h-10 w-full rounded border border-[#3A414B] bg-[#1E2228] px-3 py-2 text-sm text-white focus:outline-none focus:border-[#0D73ED] transition-colors [color-scheme:dark]"
             >
               <option value="TODO">To Do</option>
               <option value="IN_PROGRESS">In Progress</option>
@@ -127,33 +127,24 @@ export const TaskModal = ({ isOpen, onClose, task }: TaskModalProps) => {
           {...register('tags')}
         />
 
-        <div className="flex justify-end gap-3 mt-8 pt-5 border-t border-[#E5E7EB]">
+        <div className="flex gap-3 pt-4 mt-2 border-t border-[#3A414B]">
           {task && (
-            <button 
-              type="button" 
-              onClick={() => {
-                deleteTask(task.id);
-                onClose();
-              }}
-              className="mr-auto px-4 py-2 text-sm font-bold text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+            <Button
+              type="button"
+              variant="danger"
+              className="mr-auto"
+              onClick={handleDelete}
+              isLoading={isDeleting}
             >
               Delete
-            </button>
+            </Button>
           )}
-          <button 
-            type="button" 
-            onClick={onClose}
-            className="px-4 py-2 text-sm font-bold text-[#4B5563] bg-white border border-[#E5E7EB] hover:bg-[#F9FAFB] rounded-lg transition-colors shadow-sm"
-          >
+          <Button type="button" variant="secondary" onClick={onClose}>
             Cancel
-          </button>
-          <button 
-            type="submit" 
-            disabled={isLoading}
-            className="px-5 py-2 text-sm font-bold text-white bg-[#673de6] hover:bg-[#532cc2] rounded-lg transition-colors shadow-sm disabled:opacity-70 flex items-center gap-2"
-          >
-            {isLoading ? (task ? 'Saving...' : 'Creating...') : (task ? 'Save Changes' : 'Create Task')}
-          </button>
+          </Button>
+          <Button type="submit" isLoading={isLoading}>
+            {task ? 'Save Changes' : 'Create Task'}
+          </Button>
         </div>
       </form>
     </Modal>
