@@ -15,13 +15,16 @@ A modern, high-performance web application designed for task management and imag
 - Real-time UI updates for task status changes.
 
 ### 🖌️ Image Annotation Tool
-- High-performance canvas drawing using **Konva** and **React-Konva**.
-- Ability to draw shapes, add labels, and manipulate image annotations.
-- Built-in support for loading external images efficiently (`use-image`).
+- **Professional Figma-style Workspace:** A sleek, unified interface for all annotation tasks.
+- **Advanced Polygon Drawing:** Draw custom shapes with adjustable stroke sizes (thickness) and a built-in color palette.
+- **Interactive Canvas Controls:** Zoom in/out using the mouse wheel, and seamlessly navigate using the Hand Tool (Pan).
+- **Floating Thumbnail Dock:** Easily switch between uploaded images using a responsive bottom dock.
+- **Export & Delete:** Download annotated images directly to your local device. Delete specific drawn polygons or completely remove uploaded images as needed.
+- **High-performance Drawing:** Powered by **Konva** and **React-Konva** for a smooth, lag-free experience.
 
 ### 🎨 Modern UI/UX
 - Responsive, clean, and highly customizable design built with **Tailwind CSS v4**.
-- Beautiful iconography via **Lucide React**.
+- Intuitive and beautiful iconography via **Lucide React**.
 - Reusable UI components integrated with `clsx` and `tailwind-merge` for dynamic styling.
 
 ## 🛠️ Technology Stack
