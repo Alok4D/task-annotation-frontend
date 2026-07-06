@@ -3,8 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '@/utils/cn';
 import { 
-  ArrowUpRight, Trash2, Undo2, Pen, Edit3, Type,
-  Share2, Download, Save, ChevronRight
+  MousePointer2, Trash2, Undo2, Hand, Pentagon,
+  Save
 } from 'lucide-react';
 
 export type DrawingTool = 'DRAW' | 'SELECT' | 'PAN';
@@ -26,9 +26,9 @@ interface ToolbarProps {
 }
 
 const TOOLS = [
-  { id: 'SELECT', icon: ArrowUpRight, label: 'Select (V)' },
-  { id: 'DRAW', icon: Edit3, label: 'Polygon (P)' },
-  { id: 'PAN', icon: Pen, label: 'Hand Tool (H)' },
+  { id: 'SELECT', icon: MousePointer2, label: 'Select (V)' },
+  { id: 'DRAW', icon: Pentagon, label: 'Draw Polygon (P)' },
+  { id: 'PAN', icon: Hand, label: 'Pan Canvas (H)' },
 ] as const;
 
 const COLORS = [
