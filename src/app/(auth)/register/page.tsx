@@ -10,7 +10,7 @@ import { useRegisterMutation } from '@/features/auth/authApi';
 import { setCredentials } from '@/features/auth/authSlice';
 import Link from 'next/link';
 import { Spinner } from '@/components/ui/Spinner';
-import { Check } from 'lucide-react';
+import { Check, Eye, EyeOff } from 'lucide-react';
 import { cn } from '@/utils/cn';
 
 const registerSchema = z.object({
@@ -34,6 +34,8 @@ export default function RegisterPage() {
   const dispatch = useDispatch();
   const [registerUser, { isLoading }] = useRegisterMutation();
   const [errorMsg, setErrorMsg] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     register,
@@ -126,48 +128,57 @@ export default function RegisterPage() {
 
           <div>
             <label className="block text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Password <span className="text-red-500">*</span></label>
-            <input 
-              type="password" 
-              {...register('password')}
-              className={cn(
-                "w-full h-11 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-3 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all",
-                errors.password && "border-red-500 focus:border-red-500 focus:ring-red-500"
-              )}
-            />
+            <div className="relative">
+              <input 
+                type={showPassword ? "text" : "password"} 
+                {...register('password')}
+                className={cn(
+                  "w-full h-11 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg pl-3 pr-10 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all",
+                  errors.password && "border-red-500 focus:border-red-500 focus:ring-red-500"
+                )}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+              </button>
+            </div>
             <p className="text-xs text-[#6B7280] mt-1.5">Use 8 or more characters.</p>
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
           </div>
 
           <div>
             <label className="block text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Confirm Password <span className="text-red-500">*</span></label>
-            <input 
-              type="password" 
-              {...register('password_confirm')}
-              className={cn(
-                "w-full h-11 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-3 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all",
-                errors.password_confirm && "border-red-500 focus:border-red-500 focus:ring-red-500"
-              )}
-            />
+            <div className="relative">
+              <input 
+                type={showConfirmPassword ? "text" : "password"} 
+                {...register('password_confirm')}
+                className={cn(
+                  "w-full h-11 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg pl-3 pr-10 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all",
+                  errors.password_confirm && "border-red-500 focus:border-red-500 focus:ring-red-500"
+                )}
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
+              >
+                {showConfirmPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+              </button>
+            </div>
             {errors.password_confirm && <p className="text-red-500 text-xs mt-1">{errors.password_confirm.message}</p>}
           </div>
 
-          <div>
-            <label className="flex items-start gap-3 cursor-pointer group">
-              <div className="relative flex items-center justify-center mt-0.5">
-                <input 
-                  type="checkbox" 
-                  {...register('agreeTerms')}
-                  className="peer sr-only"
-                />
-                <div className="w-5 h-5 border-2 border-[#E5E7EB] rounded bg-white peer-checked:bg-[#673de6] peer-checked:border-[#673de6] transition-colors"></div>
-                <Check className="absolute text-white opacity-0 peer-checked:opacity-100 w-3.5 h-3.5 pointer-events-none" />
-              </div>
-              <div className="text-sm text-[#4B5563] leading-snug select-none">
-                I agree to the <Link href="#" className="text-[#673de6] font-semibold hover:underline">Terms of Service</Link> and <Link href="#" className="text-[#673de6] font-semibold hover:underline">Privacy Policy</Link>
-                {errors.agreeTerms && <p className="text-red-500 text-xs mt-1 block">{errors.agreeTerms.message}</p>}
-              </div>
-            </label>
-          </div>
 
           {errorMsg && (
             <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-100 font-medium">

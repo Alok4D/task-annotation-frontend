@@ -10,6 +10,7 @@ import { useLoginMutation } from '@/features/auth/authApi';
 import { setCredentials } from '@/features/auth/authSlice';
 import Link from 'next/link';
 import { cn } from '@/utils/cn';
+import { Eye, EyeOff } from 'lucide-react';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -23,6 +24,7 @@ export default function LoginPage() {
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
   const [errorMsg, setErrorMsg] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -71,14 +73,27 @@ export default function LoginPage() {
 
           <div>
             <label className="block text-[11px] font-bold text-[#6B7280] uppercase tracking-wider mb-2">Password <span className="text-red-500">*</span></label>
-            <input 
-              type="password" 
-              {...register('password')}
-              className={cn(
-                "w-full h-11 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-3 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all",
-                errors.password && "border-red-500 focus:border-red-500 focus:ring-red-500"
-              )}
-            />
+            <div className="relative">
+              <input 
+                type={showPassword ? "text" : "password"} 
+                {...register('password')}
+                className={cn(
+                  "w-full h-11 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg pl-3 pr-10 text-sm text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-1 focus:ring-[#673de6] transition-all",
+                  errors.password && "border-red-500 focus:border-red-500 focus:ring-red-500"
+                )}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+              </button>
+            </div>
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
           </div>
 
