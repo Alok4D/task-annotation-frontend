@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '@/utils/cn';
 import { 
   MousePointer2, Trash2, Undo2, Hand, Pentagon,
-  Save
+  Save, Download
 } from 'lucide-react';
 
 export type DrawingTool = 'DRAW' | 'SELECT' | 'PAN';
@@ -23,6 +23,7 @@ interface ToolbarProps {
   canDelete: boolean;
   onSave: () => void;
   canSave: boolean;
+  onDownload: () => void;
 }
 
 const TOOLS = [
@@ -69,7 +70,8 @@ export const Toolbar = ({
   onDelete,
   canDelete,
   onSave,
-  canSave
+  canSave,
+  onDownload
 }: ToolbarProps) => {
   const [openDropdown, setOpenDropdown] = useState<'COLOR' | 'SIZE' | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -181,6 +183,13 @@ export const Toolbar = ({
           className="w-9 h-9 flex items-center justify-center rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-all disabled:opacity-30 disabled:hover:bg-blue-600 shadow-sm shadow-blue-600/30 active:scale-95"
         >
           <Save className="w-[16px] h-[16px]" />
+        </button>
+        <button 
+          onClick={onDownload} 
+          title="Download Image" 
+          className="w-9 h-9 flex items-center justify-center rounded-xl text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 transition-all shadow-sm active:scale-95 mt-1"
+        >
+          <Download className="w-[16px] h-[16px]" />
         </button>
       </div>
 

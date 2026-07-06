@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Stage, Layer, Image as KonvaImage, Line, Circle } from 'react-konva';
 import useImage from 'use-image';
 import { useGetImagesQuery, useGetAnnotationsQuery, useSaveAnnotationMutation } from '@/features/annotations/annotationApi';
@@ -8,6 +8,7 @@ import { RootState } from '@/store';
 import { Toolbar, DrawingTool } from './Toolbar';
 
 export const Canvas = () => {
+  const stageRef = useRef<any>(null);
   const selectedImageId = useSelector((state: RootState) => state.annotations.selectedImageId);
   const { data: images = [] } = useGetImagesQuery();
   const { data: annotations = [] } = useGetAnnotationsQuery();
@@ -81,6 +82,18 @@ export const Canvas = () => {
     }
   };
 
+  const handleDownload = () => {
+    if (stageRef.current) {
+      const uri = stageRef.current.toDataURL({ pixelRatio: 2 });
+      const link = document.createElement('a');
+      link.download = 'annotated-image.png';
+      link.href = uri;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   const handleWheel = (e: any) => {
     e.evt.preventDefault();
     const scaleBy = 1.1;
@@ -135,12 +148,14 @@ export const Canvas = () => {
         canDelete={points.length > 0}
         onSave={handleSave}
         canSave={points.length > 2 && !isSaving}
+        onDownload={handleDownload}
       />
       
       <div className="absolute inset-0 flex justify-center items-center overflow-hidden">
         {image ? (
           <div className={`shadow-xl bg-white border border-gray-200 transition-shadow hover:shadow-2xl ${activeTool === 'DRAW' ? 'cursor-crosshair' : activeTool === 'PAN' ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}>
             <Stage
+              ref={stageRef}
               width={image.width * baseScale}
               height={image.height * baseScale}
               scaleX={baseScale * scale}
