@@ -44,8 +44,9 @@ export const Canvas = () => {
     const pointerPos = stage.getPointerPosition();
     if (!pointerPos) return;
 
-    const x = (pointerPos.x - stagePos.x) / scale;
-    const y = (pointerPos.y - stagePos.y) / scale;
+    const currentStageScale = stage.scaleX();
+    const x = (pointerPos.x - stage.x()) / currentStageScale;
+    const y = (pointerPos.y - stage.y()) / currentStageScale;
 
     if (points.length >= 3) {
       const startPoint = points[0];

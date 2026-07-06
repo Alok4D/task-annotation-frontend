@@ -15,7 +15,7 @@ export const AnnotationSidebar = () => {
 
   const handleDelete = async (id: number) => {
     if (selectedImageId) {
-      await deleteAnnotation({ id, imageId: selectedImageId });
+      await deleteAnnotation(id);
     }
   };
 
