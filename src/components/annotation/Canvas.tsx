@@ -84,16 +84,20 @@ export const Canvas = () => {
     e.evt.preventDefault();
     const scaleBy = 1.1;
     const stage = e.target.getStage();
-    const oldScale = stage.scaleX();
+    
+    const currentStageScale = stage.scaleX();
     const mousePointTo = {
-      x: stage.getPointerPosition().x / oldScale - stage.x() / oldScale,
-      y: stage.getPointerPosition().y / oldScale - stage.y() / oldScale,
+      x: stage.getPointerPosition().x / currentStageScale - stage.x() / currentStageScale,
+      y: stage.getPointerPosition().y / currentStageScale - stage.y() / currentStageScale,
     };
-    const newScale = e.evt.deltaY < 0 ? oldScale * scaleBy : oldScale / scaleBy;
+    
+    const newScale = e.evt.deltaY < 0 ? scale * scaleBy : scale / scaleBy;
+    const newStageScale = (image && image.width > 800 ? 800 / image.width : 1) * newScale;
+
     setScale(newScale);
     setStagePos({
-      x: -(mousePointTo.x - stage.getPointerPosition().x / newScale) * newScale,
-      y: -(mousePointTo.y - stage.getPointerPosition().y / newScale) * newScale,
+      x: -(mousePointTo.x - stage.getPointerPosition().x / newStageScale) * newStageScale,
+      y: -(mousePointTo.y - stage.getPointerPosition().y / newStageScale) * newStageScale,
     });
   };
 

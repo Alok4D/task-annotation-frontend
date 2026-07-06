@@ -19,12 +19,12 @@ export const annotationApi = apiWithTags.injectEndpoints({
     }),
     // We fetch all annotations and will filter them by imageId on the frontend just to be safe
     getAnnotations: builder.query<Annotation[], void>({
-      query: () => 'annotations/polygons/',
+      query: () => 'annotations/annotations/',
       providesTags: ['Annotation'],
     }),
     saveAnnotation: builder.mutation<Annotation, Partial<Annotation>>({
       query: (body) => ({
-        url: 'annotations/polygons/',
+        url: 'annotations/annotations/',
         method: 'POST',
         body,
       }),
@@ -32,7 +32,7 @@ export const annotationApi = apiWithTags.injectEndpoints({
     }),
     deleteAnnotation: builder.mutation<void, number>({
       query: (id) => ({
-        url: `annotations/polygons/${id}/`,
+        url: `annotations/annotations/${id}/`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Annotation'],
