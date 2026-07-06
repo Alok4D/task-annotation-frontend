@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Board } from '@/components/tasks/Board';
 import { DateSelector } from '@/components/tasks/DateSelector';
 import { TaskModal } from '@/components/tasks/TaskModal';
@@ -62,20 +62,18 @@ export default function TasksPage() {
         </div>
       </div>
 
-      <div className="flex-1 min-h-0 bg-transparent rounded">
+      <div className="flex-1 min-h-0 bg-transparent rounded mt-6">
         {tasks.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center bg-[#272B33] rounded border border-dashed border-[#3A414B]">
-            <div className="w-16 h-16 bg-[#1F242B] text-[#8B929D] rounded-full flex items-center justify-center mb-4">
+          <div className="w-full h-full flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center bg-transparent rounded border border-dashed border-[#3A414B] p-12 w-full max-w-lg">
+            <div className="w-16 h-16 bg-[#272B33] text-[#8B929D] rounded-full flex items-center justify-center mb-4">
               <CalendarIcon className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-bold text-white mb-2">No tasks for this date.</h3>
-            <p className="text-[#8B929D] mb-6 max-w-md text-center text-sm">
-              You have a clear schedule for {formatDateForDisplay(selectedDate)}. Enjoy your free time or add a new task to stay productive!
+            <p className="text-[#8B929D] text-center text-sm">
+              You have a clear schedule for {formatDateForDisplay(selectedDate)}. Enjoy your free time or add a new task from the top right to stay productive!
             </p>
-            <button onClick={handleCreateNew} className="h-10 px-4 bg-[#0D73ED] hover:bg-[#0b62cc] text-white font-bold text-sm rounded transition-colors flex items-center gap-2">
-              <Plus className="w-5 h-5" />
-              Create Task
-            </button>
+          </div>
           </div>
         ) : (
           <Board onEditTask={handleEditTask} />
