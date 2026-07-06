@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { DM_Sans } from 'next/font/google';
 import './globals.css';
 import { ReduxProvider } from '@/store/provider';
 
-const inter = Inter({ subsets: ['latin'] });
+const dmSans = DM_Sans({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-dm-sans',
+});
 
 export const metadata: Metadata = {
   title: 'TaskFusion',
@@ -17,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-gray-50 text-gray-900`}>
+      <body className={`${dmSans.variable} font-sans bg-gray-50 text-gray-900`}>
         <ReduxProvider>
           {children}
         </ReduxProvider>
