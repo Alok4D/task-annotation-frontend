@@ -95,7 +95,7 @@ export default function RegisterPage() {
       {/* Left Column - Image */}
       <div className="hidden lg:flex flex-col justify-center items-center relative overflow-hidden bg-gradient-to-br from-[#4c24b3] to-[#271060]">
         <div className="absolute inset-0">
-          <img src="/auth-bg.png" alt="Task Annotation Dashboard" className="w-full h-full object-cover mix-blend-screen opacity-70" />
+          <img src="/register-bg.png" alt="Join the Annotation Platform" className="w-full h-full object-cover mix-blend-screen opacity-70" />
         </div>
       </div>
 
