@@ -95,7 +95,16 @@ export default function RegisterPage() {
       {/* Left Column - Image */}
       <div className="hidden lg:flex flex-col justify-center items-center relative overflow-hidden bg-gradient-to-br from-[#4c24b3] to-[#271060]">
         <div className="absolute inset-0">
-          <img src="/register-bg.png" alt="Join the Annotation Platform" className="w-full h-full object-cover mix-blend-screen opacity-70" />
+          <img src="/register-bg.png" alt="TaskCanvas" className="w-full h-full object-cover mix-blend-screen opacity-70" />
+        </div>
+        <div className="relative z-10 text-white max-w-lg text-center px-8">
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30">
+              <span className="text-white font-black text-2xl">TC</span>
+            </div>
+          </div>
+          <h2 className="text-[42px] font-black mb-4 tracking-tight leading-tight">Join TaskCanvas</h2>
+          <p className="text-lg text-indigo-200 font-medium leading-relaxed">Create your account and start managing tasks and annotating images today.</p>
         </div>
       </div>
 
@@ -104,8 +113,11 @@ export default function RegisterPage() {
         <div className="w-full max-w-110">
 
           <div className="flex flex-col mb-10 text-center items-center">
+            <div className="w-12 h-12 bg-[#673de6] rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-[#673de6]/30">
+              <span className="text-white font-black text-lg">TC</span>
+            </div>
             <h1 className="text-[32px] font-black text-[#1F2937] tracking-tight mb-2">Create an account</h1>
-            <p className="text-[#6B7280] font-medium text-[15px]">Sign up to get started with your free account.</p>
+            <p className="text-[#6B7280] font-medium text-[15px]">Join TaskCanvas and get started for free.</p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

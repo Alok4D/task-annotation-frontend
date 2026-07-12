@@ -10,8 +10,13 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'TaskFusion',
-  description: 'Kanban Board & Image Annotation App',
+  title: 'TaskCanvas',
+  description: 'TaskCanvas – Task Management & Image Annotation Platform',
+  icons: {
+    icon: '/fav-logo.png',
+    shortcut: '/fav-logo.png',
+    apple: '/fav-logo.png',
+  },
 };
 
 export default function RootLayout({
