@@ -23,9 +23,9 @@ export const Canvas = ({ children }: { children?: React.ReactNode }) => {
   const [isFinished, setIsFinished] = useState(false);
   
   const [activeTool, setActiveTool] = useState<DrawingTool>('DRAW');
-  const activeColor = '#673de6'; // Using primary brand color for drawing
-  const activeSize = 4;
-  
+  const [activeColor, setActiveColor] = useState('#673de6');
+  const [activeSize, setActiveSize] = useState(4);
+
   const [scale, setScale] = useState(1);
   const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
 
@@ -79,6 +79,18 @@ export const Canvas = ({ children }: { children?: React.ReactNode }) => {
       } catch (err) {
         console.error('Failed to save annotation', err);
       }
+    }
+  };
+
+  const handleDownload = () => {
+    if (stageRef.current) {
+      const uri = stageRef.current.toDataURL({ pixelRatio: 2 });
+      const link = document.createElement('a');
+      link.download = 'annotated-image.png';
+      link.href = uri;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -214,17 +226,33 @@ export const Canvas = ({ children }: { children?: React.ReactNode }) => {
           <Toolbar 
             activeTool={activeTool} 
             onToolChange={setActiveTool}
+            activeColor={activeColor}
+            onColorChange={setActiveColor}
+            activeSize={activeSize}
+            onSizeChange={setActiveSize}
             onUndo={handleUndo}
             canUndo={points.length > 0}
             onDelete={() => { setPoints([]); setIsFinished(false); }}
             canDelete={points.length > 0}
             onSave={handleSave}
             canSave={points.length > 2 && !isSaving}
+            onDownload={handleDownload}
           />
         </div>
 
-        <div className="flex-1 border-l border-gray-200 bg-white">
-          {children}
+        <div className="flex-1 border-l border-gray-200 bg-white flex flex-col">
+          <div className="flex-1 overflow-hidden">
+            {children}
+          </div>
+          <div className="p-4 mt-auto border-t border-gray-100">
+            <button 
+              onClick={handleSave} 
+              disabled={points.length < 3 || isSaving} 
+              className="w-full flex items-center justify-center gap-2 bg-[#673de6] hover:bg-[#532cc2] text-white py-3.5 rounded-xl text-sm font-bold transition-all disabled:opacity-50 disabled:hover:bg-[#673de6] shadow-lg shadow-[#673de6]/20 active:scale-95"
+            >
+              Save Annotations
+            </button>
+          </div>
         </div>
 
       </div>
