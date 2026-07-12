@@ -116,8 +116,8 @@ export default function RegisterPage() {
                 placeholder="Enter your name"
                 {...register('name')}
                 className={cn(
-                  "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none px-4 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
-                  errors.name && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                  "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none px-4 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] transition-all",
+                  errors.name && "border-red-500 focus:border-red-500"
                 )}
               />
               {errors.name && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.name.message}</p>}
@@ -130,8 +130,8 @@ export default function RegisterPage() {
                 placeholder="Enter your email"
                 {...register('email')}
                 className={cn(
-                  "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none px-4 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
-                  errors.email && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                  "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none px-4 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] transition-all",
+                  errors.email && "border-red-500 focus:border-red-500"
                 )}
               />
               {errors.email && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.email.message}</p>}
@@ -145,8 +145,8 @@ export default function RegisterPage() {
                   placeholder="Create a password"
                   {...register('password')}
                   className={cn(
-                    "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none pl-4 pr-12 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
-                    errors.password && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                    "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none pl-4 pr-12 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] transition-all",
+                    errors.password && "border-red-500 focus:border-red-500"
                   )}
                 />
                 <button
@@ -172,8 +172,8 @@ export default function RegisterPage() {
                   placeholder="Confirm your password"
                   {...register('password_confirm')}
                   className={cn(
-                    "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none pl-4 pr-12 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
-                    errors.password_confirm && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                    "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none pl-4 pr-12 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] transition-all",
+                    errors.password_confirm && "border-red-500 focus:border-red-500"
                   )}
                 />
                 <button
