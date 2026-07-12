@@ -1,9 +1,9 @@
 'use client';
 
+import { z } from 'zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { useRegisterMutation } from '@/features/auth/authApi';
@@ -63,7 +63,7 @@ export default function RegisterPage() {
         password: data.password,
         password_confirm: data.password_confirm,
       }).unwrap();
-      
+
       dispatch(
         setCredentials({
           user: response.user || { id: 0, email: data.email, name: data.name, created_at: '' },
@@ -102,7 +102,7 @@ export default function RegisterPage() {
       {/* Right Column - Form */}
       <div className="flex items-center justify-center p-6 lg:p-12 relative">
         <div className="w-full max-w-110">
-          
+
           <div className="flex flex-col mb-10 text-center items-center">
             <h1 className="text-[32px] font-black text-[#1F2937] tracking-tight mb-2">Create an account</h1>
             <p className="text-[#6B7280] font-medium text-[15px]">Sign up to get started with your free account.</p>
@@ -111,8 +111,8 @@ export default function RegisterPage() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
               <label className="block text-[12px] font-bold text-[#4B5563] uppercase tracking-wider mb-2">Name</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 placeholder="Enter your name"
                 {...register('name')}
                 className={cn(
@@ -125,8 +125,8 @@ export default function RegisterPage() {
 
             <div>
               <label className="block text-[12px] font-bold text-[#4B5563] uppercase tracking-wider mb-2">Email</label>
-              <input 
-                type="email" 
+              <input
+                type="email"
                 placeholder="Enter your email"
                 {...register('email')}
                 className={cn(
@@ -140,8 +140,8 @@ export default function RegisterPage() {
             <div>
               <label className="block text-[12px] font-bold text-[#4B5563] uppercase tracking-wider mb-2">Password</label>
               <div className="relative">
-                <input 
-                  type={showPassword ? "text" : "password"} 
+                <input
+                  type={showPassword ? "text" : "password"}
                   placeholder="Create a password"
                   {...register('password')}
                   className={cn(
@@ -161,15 +161,14 @@ export default function RegisterPage() {
                   )}
                 </button>
               </div>
-              {watch('password') && watch('password').length < 8 && <p className="text-xs text-[#9CA3AF] mt-1.5 font-medium">Use 8 or more characters.</p>}
               {errors.password && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.password.message}</p>}
             </div>
 
             <div>
               <label className="block text-[12px] font-bold text-[#4B5563] uppercase tracking-wider mb-2">Confirm Password</label>
               <div className="relative">
-                <input 
-                  type={showConfirmPassword ? "text" : "password"} 
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm your password"
                   {...register('password_confirm')}
                   className={cn(
@@ -202,10 +201,10 @@ export default function RegisterPage() {
               </div>
             )}
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={isLoading}
-              className="w-full h-12 bg-[#673de6] hover:bg-[#532cc2] text-white font-bold text-[15px] rounded-none transition-all disabled:opacity-70 mt-8 flex items-center justify-center hover:-translate-y-0.5"
+              className="w-full h-12 bg-[#673de6] hover:bg-[#532cc2] text-white font-bold text-[15px] rounded-sm transition-all disabled:opacity-70 mt-8 flex items-center justify-center hover:-translate-y-0.5"
             >
               {isLoading ? 'Signing up...' : 'Sign Up'}
             </button>
