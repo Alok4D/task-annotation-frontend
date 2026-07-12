@@ -17,10 +17,6 @@ const registerSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
   password: z.string().min(8, 'Use 8 or more characters'),
   password_confirm: z.string().min(1, 'Confirm your password'),
-  agreeTerms: z.boolean().refine(val => val === true, {
-    message: 'You must agree to the Terms and Privacy Policy'
-  }),
-  subscribe: z.boolean().optional(),
 }).refine(data => data.password === data.password_confirm, {
   message: "Passwords don't match",
   path: ['password_confirm'],
@@ -46,13 +42,12 @@ export default function RegisterPage() {
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      agreeTerms: false,
-      subscribe: true,
+      name: '',
+      email: '',
+      password: '',
+      password_confirm: '',
     }
   });
-
-  const agreeTerms = watch('agreeTerms');
-  const subscribe = watch('subscribe');
 
   const onSubmit = async (data: RegisterFormValues) => {
     setErrorMsg('');

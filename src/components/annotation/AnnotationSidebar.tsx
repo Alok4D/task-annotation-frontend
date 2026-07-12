@@ -19,43 +19,42 @@ export const AnnotationSidebar = () => {
     }
   };
 
+  const savedColors = ['#a855f7', '#22c55e', '#f97316', '#3b82f6', '#ec4899'];
+
   return (
-    <div className="flex-1 bg-white flex flex-col w-full h-full">
-      <div className="p-5 border-b border-gray-100 flex items-center gap-2">
-        <Shapes className="w-5 h-5 text-blue-600" />
-        <h3 className="font-bold text-gray-800">Saved Polygons</h3>
+    <div className="flex-1 bg-white flex flex-col w-full h-full text-gray-800">
+      <div className="px-5 py-6 flex items-center gap-2">
+        <h3 className="font-bold text-gray-800">Annotations</h3>
       </div>
       
-      <div className="flex-1 p-4 overflow-y-auto flex flex-col gap-3">
+      <div className="flex-1 px-5 pb-5 overflow-y-auto flex flex-col gap-3 custom-scrollbar">
         {currentAnnotations.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center text-center text-gray-400">
-            <Shapes className="w-12 h-12 mb-2 opacity-20" />
-            <p className="text-sm">No polygons drawn on this image yet.</p>
+            <Shapes className="w-10 h-10 mb-2 opacity-20" />
+            <p className="text-sm">No polygons drawn.</p>
           </div>
         ) : (
-          currentAnnotations.map((ann, idx) => (
-            <div key={ann.id} className="p-3 bg-gray-50 rounded-xl flex items-center justify-between border border-gray-100 group hover:border-blue-200 transition-colors shadow-sm">
+          currentAnnotations.map((ann, idx) => {
+            const color = savedColors[idx % savedColors.length];
+            return (
+            <div key={ann.id} className="p-3 bg-gray-50 rounded-xl flex items-center justify-between group hover:bg-gray-100 transition-colors border border-gray-100">
               <div className="flex items-center gap-3">
-                <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold shadow-sm">
-                  {idx + 1}
-                </div>
+                <div className="w-3 h-3 rounded-full shadow-sm" style={{ backgroundColor: color, boxShadow: `0 0 8px ${color}80` }}></div>
                 <div className="text-sm font-medium text-gray-700">
-                  Polygon {ann.id}
-                  <p className="text-[10px] text-gray-400 font-normal">{ann.polygon_points.length} points</p>
+                  Polygon {idx + 1}
                 </div>
               </div>
               
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 hover:bg-red-50 transition-all"
+              <button 
+                className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 p-1 transition-all"
                 onClick={() => handleDelete(ann.id)}
                 disabled={isLoading}
               >
                 <Trash2 className="w-4 h-4" />
-              </Button>
+              </button>
             </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>

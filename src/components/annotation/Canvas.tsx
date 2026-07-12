@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { Toolbar, DrawingTool } from './Toolbar';
 
-export const Canvas = () => {
+export const Canvas = ({ children }: { children?: React.ReactNode }) => {
   const stageRef = useRef<any>(null);
   const selectedImageId = useSelector((state: RootState) => state.annotations.selectedImageId);
   const { data: images = [] } = useGetImagesQuery();
@@ -23,8 +23,8 @@ export const Canvas = () => {
   const [isFinished, setIsFinished] = useState(false);
   
   const [activeTool, setActiveTool] = useState<DrawingTool>('DRAW');
-  const [activeColor, setActiveColor] = useState('#FBBC05');
-  const [activeSize, setActiveSize] = useState(4);
+  const activeColor = '#673de6'; // Using primary brand color for drawing
+  const activeSize = 4;
   
   const [scale, setScale] = useState(1);
   const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
@@ -82,18 +82,6 @@ export const Canvas = () => {
     }
   };
 
-  const handleDownload = () => {
-    if (stageRef.current) {
-      const uri = stageRef.current.toDataURL({ pixelRatio: 2 });
-      const link = document.createElement('a');
-      link.download = 'annotated-image.png';
-      link.href = uri;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
-
   const handleWheel = (e: any) => {
     e.evt.preventDefault();
     const scaleBy = 1.1;
@@ -117,7 +105,7 @@ export const Canvas = () => {
 
   if (!selectedImage) {
     return (
-      <div className="flex-1 bg-white rounded-2xl border border-gray-100 flex items-center justify-center shadow-sm">
+      <div className="flex-1 bg-white flex items-center justify-center">
         <p className="text-gray-400 font-medium">Select an image to start annotating</p>
       </div>
     );
@@ -130,30 +118,19 @@ export const Canvas = () => {
 
   const baseScale = image && image.width > 800 ? 800 / image.width : 1;
 
+  // A distinct color palette for saved polygons to match the mockup
+  const savedColors = ['#a855f7', '#22c55e', '#f97316', '#3b82f6', '#ec4899'];
+
   return (
-    <div 
-      className="flex-1 bg-gray-50/50 overflow-hidden relative flex items-center justify-center shadow-inner"
-      style={{ backgroundImage: 'radial-gradient(#CBD5E1 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}
-    >
-      <Toolbar 
-        activeTool={activeTool} 
-        onToolChange={setActiveTool}
-        activeColor={activeColor}
-        onColorChange={setActiveColor}
-        activeSize={activeSize}
-        onSizeChange={setActiveSize}
-        onUndo={handleUndo}
-        canUndo={points.length > 0}
-        onDelete={() => { setPoints([]); setIsFinished(false); }}
-        canDelete={points.length > 0}
-        onSave={handleSave}
-        canSave={points.length > 2 && !isSaving}
-        onDownload={handleDownload}
-      />
+    <div className="flex-1 flex overflow-hidden">
       
-      <div className="absolute inset-0 flex justify-center items-center overflow-hidden">
+      {/* Drawing Area */}
+      <div 
+        className="flex-1 bg-gray-50/50 relative flex items-center justify-center overflow-hidden shadow-inner"
+        style={{ backgroundImage: 'radial-gradient(#CBD5E1 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}
+      >
         {image ? (
-          <div className={`shadow-xl bg-white border border-gray-200 transition-shadow hover:shadow-2xl ${activeTool === 'DRAW' ? 'cursor-crosshair' : activeTool === 'PAN' ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}>
+          <div className={`transition-shadow shadow-xl bg-white border border-gray-200 hover:shadow-2xl ${activeTool === 'DRAW' ? 'cursor-crosshair' : activeTool === 'PAN' ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}>
             <Stage
               ref={stageRef}
               width={image.width * baseScale}
@@ -170,19 +147,31 @@ export const Canvas = () => {
               <Layer>
                 <KonvaImage image={image} />
                 
-                {currentAnnotations.map((ann) => {
+                {currentAnnotations.map((ann, idx) => {
                   const savedFlatPoints = ann.polygon_points.flatMap(p => [p.x, p.y]);
                   savedFlatPoints.push(ann.polygon_points[0].x, ann.polygon_points[0].y);
+                  const color = savedColors[idx % savedColors.length];
                   
                   return (
                     <React.Fragment key={ann.id}>
                       <Line
                         points={savedFlatPoints}
-                        stroke="#4285F4" // Default blue for saved annotations
-                        strokeWidth={4 / scale}
+                        stroke={color} 
+                        strokeWidth={3 / scale}
                         closed
-                        fill="rgba(66, 133, 244, 0.2)"
+                        fill={`${color}40`} // 25% opacity
                       />
+                      {ann.polygon_points.map((p, i) => (
+                        <Circle
+                          key={i}
+                          x={p.x}
+                          y={p.y}
+                          radius={3 / scale}
+                          fill="#FFFFFF"
+                          stroke={color}
+                          strokeWidth={1.5 / scale}
+                        />
+                      ))}
                     </React.Fragment>
                   );
                 })}
@@ -195,7 +184,7 @@ export const Canvas = () => {
                       strokeWidth={activeSize / scale}
                       dash={isFinished ? [] : [10 / scale, 10 / scale]}
                       closed={isFinished}
-                      fill={isFinished ? `${activeColor}40` : undefined} // 40 is 25% opacity hex
+                      fill={isFinished ? `${activeColor}40` : undefined}
                     />
                     {points.map((p, i) => (
                       <Circle
@@ -214,9 +203,32 @@ export const Canvas = () => {
             </Stage>
           </div>
         ) : (
-          <p className="text-gray-500">Loading image on canvas...</p>
+          <p className="text-gray-600">Loading image on canvas...</p>
         )}
       </div>
+
+      {/* Right Sidebar Composite (Tools + Annotations) */}
+      <div className="flex shrink-0 w-[420px] bg-white border-l border-gray-200 z-10 shadow-[-10px_0_30px_rgba(0,0,0,0.05)]">
+        
+        <div className="w-[180px]">
+          <Toolbar 
+            activeTool={activeTool} 
+            onToolChange={setActiveTool}
+            onUndo={handleUndo}
+            canUndo={points.length > 0}
+            onDelete={() => { setPoints([]); setIsFinished(false); }}
+            canDelete={points.length > 0}
+            onSave={handleSave}
+            canSave={points.length > 2 && !isSaving}
+          />
+        </div>
+
+        <div className="flex-1 border-l border-gray-200 bg-white">
+          {children}
+        </div>
+
+      </div>
+
     </div>
   );
 };
