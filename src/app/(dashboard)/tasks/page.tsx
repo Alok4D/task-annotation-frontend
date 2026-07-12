@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Board } from '@/components/tasks/Board';
 import { DateSelector } from '@/components/tasks/DateSelector';
 import { TaskModal } from '@/components/tasks/TaskModal';
-import { Button } from '@/components/ui/Button';
 import { Plus } from 'lucide-react';
 import { Task } from '@/types/task';
 import { useSelector } from 'react-redux';
@@ -37,7 +36,7 @@ export default function TasksPage() {
 
   return (
     <div className="h-full flex flex-col gap-6 w-full animate-in fade-in slide-in-from-bottom-4 duration-500 font-sans">
-      <div className="flex justify-between items-end bg-white p-6 rounded-xl shadow-sm border border-[#E5E7EB]">
+      <div className="flex justify-between items-end bg-white p-6 rounded-md shadow-xs border border-[#E5E7EB]">
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-black text-[#2F1C6A] tracking-tight flex items-center gap-2">
@@ -66,12 +65,12 @@ export default function TasksPage() {
       <div className="flex-1 min-h-0 bg-transparent rounded-xl mt-6">
         {tasks.length === 0 ? (
           <div className="w-full h-full flex flex-col items-center justify-center">
-            <div className="flex flex-col items-center justify-center bg-white rounded-2xl border border-dashed border-[#CBD5E1] p-12 w-full max-w-lg shadow-sm">
+            <div className="flex flex-col items-center justify-center bg-white rounded-md border border-dashed border-[#CBD5E1] p-12 w-full max-w-xl">
             <div className="w-16 h-16 bg-[#F4F5F7] text-[#6B7280] rounded-full flex items-center justify-center mb-4">
               <CalendarIcon className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-black text-[#2F1C6A] mb-2">No tasks for this date.</h3>
-            <p className="text-[#6B7280] text-center text-sm">
+            <h3 className="text-2xl font-black text-[#2F1C6A] mb-2">No tasks for this date.</h3>
+            <p className="text-[#6B7280] text-center text-md">
               You have a clear schedule for {formatDateForDisplay(selectedDate)}. Enjoy your free time or add a new task from the top right to stay productive!
             </p>
           </div>
