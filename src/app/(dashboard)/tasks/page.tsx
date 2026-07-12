@@ -36,7 +36,7 @@ export default function TasksPage() {
 
   return (
     <div className="h-full flex flex-col gap-6 w-full animate-in fade-in slide-in-from-bottom-4 duration-500 font-sans">
-      <div className="flex justify-between items-end bg-white p-6 rounded-md shadow-xs border border-[#E5E7EB]">
+      <div className="flex justify-between items-end bg-white p-6 rounded-none shadow-xs border border-[#E5E7EB]">
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-black text-[#2F1C6A] tracking-tight flex items-center gap-2">
@@ -55,7 +55,7 @@ export default function TasksPage() {
         
         <div className="flex items-center gap-4">
           <DateSelector />
-          <button onClick={handleCreateNew} className="h-11 px-5 bg-[#673de6] hover:bg-[#532cc2] text-white font-bold text-sm rounded-full transition-colors flex items-center gap-2 shadow-sm">
+          <button onClick={handleCreateNew} className="h-11 px-5 bg-[#673de6] hover:bg-[#532cc2] text-white font-bold text-sm rounded-md transition-colors flex items-center gap-2">
             <Plus className="w-5 h-5" />
             New Task
           </button>

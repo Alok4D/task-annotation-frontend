@@ -32,7 +32,7 @@ export const TaskCard = ({ task, onEdit }: TaskCardProps) => {
       style={style}
       {...attributes}
       {...listeners}
-      className={`bg-white p-4 rounded-xl shadow-sm border border-[#E5E7EB] cursor-grab active:cursor-grabbing hover:border-[#673de6] hover:shadow-md transition-all group relative ${
+      className={`bg-white p-4 rounded-none shadow-sm border border-[#E5E7EB] cursor-grab active:cursor-grabbing hover:border-[#673de6] hover:shadow-md transition-all group relative ${
         isDragging ? 'ring-2 ring-[#673de6] shadow-xl scale-105' : ''
       }`}
       onClick={(e) => {
