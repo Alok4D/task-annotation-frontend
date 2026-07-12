@@ -47,35 +47,21 @@ export default function AnnotatePage() {
   const handleNext = () => { if (selectedIndex < images.length - 1) dispatch(setSelectedImageId(images[selectedIndex + 1].id)); }
 
   return (
-    <div className="h-full flex flex-col bg-[#F4F5F7] text-gray-900 w-full relative overflow-hidden font-sans rounded-2xl shadow-sm border border-gray-200">
+    <div className="h-[calc(100vh-73px)] -m-6 flex flex-col bg-white text-gray-900 w-[calc(100%+3rem)] relative overflow-hidden font-sans border-t border-gray-200">
       
-      {/* Top Header */}
-      <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0 z-20">
-        <div className="flex items-center gap-3">
-          <img src="/full-logo.png" alt="TaskCanvas Logo" className="h-8 object-contain" />
-        </div>
-
-        {/* Pagination */}
-        <div className="flex items-center gap-4 bg-gray-50 rounded-xl px-2 py-1.5 border border-gray-200">
-           <button onClick={handlePrev} disabled={selectedIndex <= 0} className="p-1 hover:bg-gray-200 rounded-lg disabled:opacity-30 transition-colors"><ChevronLeft className="w-4 h-4 text-gray-600"/></button>
-           <span className="text-sm font-bold text-gray-700 px-2">{images.length > 0 ? `${selectedIndex + 1} / ${images.length}` : '0 / 0'}</span>
-           <button onClick={handleNext} disabled={selectedIndex >= images.length - 1 || images.length === 0} className="p-1 hover:bg-gray-200 rounded-lg disabled:opacity-30 transition-colors"><ChevronRight className="w-4 h-4 text-gray-600"/></button>
-        </div>
-
-        {/* Zoom Controls Placeholder (Functional zoom is inside Canvas via scroll) */}
-        <div className="flex items-center gap-2 bg-gray-50 rounded-xl px-2 py-1.5 border border-gray-200">
-           <button className="p-1 hover:bg-gray-200 rounded-lg text-gray-500 hover:text-gray-800"><ZoomOut className="w-4 h-4"/></button>
-           <span className="text-sm font-bold px-2 text-gray-700">100%</span>
-           <button className="p-1 hover:bg-gray-200 rounded-lg text-gray-500 hover:text-gray-800"><ZoomIn className="w-4 h-4"/></button>
-        </div>
-      </header>
-
       {/* Main Workspace */}
       <div className="flex-1 flex min-h-0 relative">
         
         {/* Left Sidebar - Thumbnails */}
-        <div className="w-64 bg-white border-r border-gray-200 flex flex-col z-10 shrink-0">
-          <div className="p-4 border-b border-gray-100">
+        <div className="w-72 bg-white border-r border-gray-200 flex flex-col z-10 shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
+          <div className="p-5 border-b border-gray-100 flex flex-col gap-4">
+            
+            {/* Pagination moved here */}
+            <div className="flex items-center justify-between bg-gray-50 rounded-xl px-3 py-2 border border-gray-200">
+               <button onClick={handlePrev} disabled={selectedIndex <= 0} className="p-1 hover:bg-white hover:shadow-sm rounded-lg disabled:opacity-30 transition-all"><ChevronLeft className="w-4 h-4 text-gray-600"/></button>
+               <span className="text-sm font-bold text-gray-700 px-2">{images.length > 0 ? `Image ${selectedIndex + 1} of ${images.length}` : '0 Images'}</span>
+               <button onClick={handleNext} disabled={selectedIndex >= images.length - 1 || images.length === 0} className="p-1 hover:bg-white hover:shadow-sm rounded-lg disabled:opacity-30 transition-all"><ChevronRight className="w-4 h-4 text-gray-600"/></button>
+            </div>
             <input type="file" accept="image/*" multiple onChange={handleFileChange} className="hidden" ref={fileInputRef} />
             <button 
               onClick={() => fileInputRef.current?.click()}

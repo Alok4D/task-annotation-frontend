@@ -6,6 +6,7 @@ import { useGetImagesQuery, useGetAnnotationsQuery, useSaveAnnotationMutation } 
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { Toolbar, DrawingTool } from './Toolbar';
+import { ZoomIn, ZoomOut } from 'lucide-react';
 
 export const Canvas = ({ children }: { children?: React.ReactNode }) => {
   const stageRef = useRef<any>(null);
@@ -141,6 +142,14 @@ export const Canvas = ({ children }: { children?: React.ReactNode }) => {
         className="flex-1 bg-gray-50/50 relative flex items-center justify-center overflow-hidden shadow-inner"
         style={{ backgroundImage: 'radial-gradient(#CBD5E1 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}
       >
+        
+        {/* Floating Zoom Controls */}
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-xl px-2 py-1.5 border border-gray-200 shadow-sm">
+           <button onClick={() => setScale(Math.max(0.1, scale / 1.1))} className="p-1.5 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-800 transition-colors"><ZoomOut className="w-4 h-4"/></button>
+           <span className="text-xs font-bold px-2 text-gray-700 min-w-[3rem] text-center">{Math.round(scale * 100)}%</span>
+           <button onClick={() => setScale(scale * 1.1)} className="p-1.5 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-800 transition-colors"><ZoomIn className="w-4 h-4"/></button>
+        </div>
+
         {image ? (
           <div className={`transition-shadow shadow-xl bg-white border border-gray-200 hover:shadow-2xl ${activeTool === 'DRAW' ? 'cursor-crosshair' : activeTool === 'PAN' ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}>
             <Stage
