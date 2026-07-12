@@ -24,6 +24,7 @@ function useOnClickOutside(ref: React.RefObject<HTMLElement>, handler: () => voi
 }
 
 export const DateSelector = () => {
+
   const dispatch = useDispatch();
   const selectedDateStr = useSelector((state: RootState) => state.tasks.selectedDate);
   const { data: allTasks = [] } = useGetAllTasksQuery();
@@ -95,7 +96,7 @@ export const DateSelector = () => {
 
   return (
     <div className="relative" ref={popoverRef}>
-      <div className="flex items-center gap-1 bg-white p-1.5 rounded-lg shadow-sm border border-[#E5E7EB] w-fit">
+      <div className="flex items-center gap-1 bg-white p-1.5 rounded-md border border-[#E5E7EB] w-fit">
         <button onClick={handlePrevDay} className="p-1 px-2 hover:bg-[#F4F5F7] rounded text-[#6B7280] transition-colors">
           <ChevronLeft className="w-5 h-5" />
         </button>
