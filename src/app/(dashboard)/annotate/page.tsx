@@ -17,7 +17,6 @@ export default function AnnotatePage() {
   const [deleteImage] = useDeleteImageMutation();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-select first image if none is selected
   useEffect(() => {
     if (!selectedImageId && images.length > 0) {
       dispatch(setSelectedImageId(images[0].id));
