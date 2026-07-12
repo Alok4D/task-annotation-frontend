@@ -103,7 +103,7 @@ export default function RegisterPage() {
       <div className="flex items-center justify-center p-6 lg:p-12 relative">
         <div className="w-full max-w-110">
           
-          <div className="flex flex-col mb-10">
+          <div className="flex flex-col mb-10 text-center items-center">
             <h1 className="text-[32px] font-black text-[#1F2937] tracking-tight mb-2">Create an account</h1>
             <p className="text-[#6B7280] font-medium text-[15px]">Sign up to get started with your free account.</p>
           </div>
@@ -116,7 +116,7 @@ export default function RegisterPage() {
                 placeholder="Enter your name"
                 {...register('name')}
                 className={cn(
-                  "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-4 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
+                  "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none px-4 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
                   errors.name && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                 )}
               />
@@ -130,7 +130,7 @@ export default function RegisterPage() {
                 placeholder="Enter your email"
                 {...register('email')}
                 className={cn(
-                  "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-4 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
+                  "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none px-4 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
                   errors.email && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                 )}
               />
@@ -145,7 +145,7 @@ export default function RegisterPage() {
                   placeholder="Create a password"
                   {...register('password')}
                   className={cn(
-                    "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl pl-4 pr-12 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
+                    "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none pl-4 pr-12 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
                     errors.password && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                   )}
                 />
@@ -161,7 +161,7 @@ export default function RegisterPage() {
                   )}
                 </button>
               </div>
-              <p className="text-xs text-[#9CA3AF] mt-1.5 font-medium">Use 8 or more characters.</p>
+              {watch('password') && watch('password').length < 8 && <p className="text-xs text-[#9CA3AF] mt-1.5 font-medium">Use 8 or more characters.</p>}
               {errors.password && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.password.message}</p>}
             </div>
 
@@ -173,7 +173,7 @@ export default function RegisterPage() {
                   placeholder="Confirm your password"
                   {...register('password_confirm')}
                   className={cn(
-                    "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl pl-4 pr-12 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
+                    "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none pl-4 pr-12 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
                     errors.password_confirm && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                   )}
                 />
@@ -194,7 +194,7 @@ export default function RegisterPage() {
 
 
             {errorMsg && (
-              <div className="p-4 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100 font-medium flex items-center gap-2">
+              <div className="p-4 bg-red-50 text-red-600 text-sm rounded-none border border-red-100 font-medium flex items-center gap-2">
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -205,7 +205,7 @@ export default function RegisterPage() {
             <button 
               type="submit" 
               disabled={isLoading}
-              className="w-full h-12 bg-[#673de6] hover:bg-[#532cc2] text-white font-bold text-[15px] rounded-xl transition-all shadow-xl shadow-[#673de6]/25 disabled:opacity-70 mt-8 flex items-center justify-center hover:-translate-y-0.5"
+              className="w-full h-12 bg-[#673de6] hover:bg-[#532cc2] text-white font-bold text-[15px] rounded-none transition-all disabled:opacity-70 mt-8 flex items-center justify-center hover:-translate-y-0.5"
             >
               {isLoading ? 'Signing up...' : 'Sign Up'}
             </button>

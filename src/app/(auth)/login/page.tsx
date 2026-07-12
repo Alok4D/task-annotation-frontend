@@ -53,7 +53,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 font-sans bg-white">
       {/* Left Column - Image */}
-      <div className="hidden lg:flex flex-col justify-center items-center relative overflow-hidden bg-gradient-to-br from-[#4c24b3] to-[#271060]">
+      <div className="hidden lg:flex flex-col justify-center items-center relative overflow-hidden bg-linear-to-br from-[#4c24b3] to-[#271060]">
         <div className="absolute inset-0">
           <img src="/auth-bg.png" alt="Task Annotation Dashboard" className="w-full h-full object-cover mix-blend-screen opacity-70" />
         </div>
@@ -62,7 +62,7 @@ export default function LoginPage() {
       {/* Right Column - Form */}
       <div className="flex items-center justify-center p-6 lg:p-12 relative">
         <div className="w-full max-w-110">
-          <div className="flex flex-col mb-10">
+          <div className="flex flex-col mb-10 text-center items-center">
             <h1 className="text-[32px] font-black text-[#1F2937] tracking-tight mb-2">Welcome Back</h1>
             <p className="text-[#6B7280] font-medium text-[15px]">Please enter your details to sign in.</p>
           </div>
@@ -75,7 +75,7 @@ export default function LoginPage() {
                 placeholder="Enter your email"
                 {...register('email')}
                 className={cn(
-                  "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-4 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
+                  "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none px-4 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
                   errors.email && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                 )}
               />
@@ -90,7 +90,7 @@ export default function LoginPage() {
                   placeholder="Enter your password"
                   {...register('password')}
                   className={cn(
-                    "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl pl-4 pr-12 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
+                    "w-full h-12 bg-[#F9FAFB] border border-[#E5E7EB] rounded-none pl-4 pr-12 text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#673de6] focus:ring-2 focus:ring-[#673de6]/20 transition-all",
                     errors.password && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                   )}
                 />
@@ -110,8 +110,8 @@ export default function LoginPage() {
             </div>
 
             {errorMsg && (
-              <div className="p-4 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100 font-medium flex items-center gap-2">
-                <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="p-4 bg-red-50 text-red-600 text-sm rounded-none border border-red-100 font-medium flex items-center gap-2">
+                <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 {errorMsg}
@@ -121,7 +121,7 @@ export default function LoginPage() {
             <button 
               type="submit" 
               disabled={isLoading}
-              className="w-full h-12 bg-[#673de6] hover:bg-[#532cc2] text-white font-bold text-[15px] rounded-xl transition-all shadow-xl shadow-[#673de6]/25 disabled:opacity-70 mt-8 flex items-center justify-center hover:-translate-y-0.5"
+              className="w-full h-12 bg-[#673de6] hover:bg-[#532cc2] text-white font-bold text-[15px] rounded-none transition-all disabled:opacity-70 mt-8 flex items-center justify-center hover:-translate-y-0.5"
             >
               {isLoading ? 'Signing in...' : 'Sign In'}
             </button>
