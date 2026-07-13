@@ -36,10 +36,10 @@ export default function TasksPage() {
 
   return (
     <div className="h-full flex flex-col gap-6 w-full animate-in fade-in slide-in-from-bottom-4 duration-500 font-sans">
-      <div className="flex justify-between items-end bg-white p-6 rounded-none shadow-xs border border-[#E5E7EB]">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 md:gap-0 bg-white p-4 sm:p-6 rounded-none shadow-xs border border-[#E5E7EB]">
         <div>
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-black text-[#2F1C6A] tracking-tight flex items-center gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <h1 className="text-xl sm:text-2xl font-black text-[#2F1C6A] tracking-tight flex items-center gap-2">
               📅 {formatDateForDisplay(selectedDate)}
             </h1>
             {isToday && (
@@ -48,14 +48,16 @@ export default function TasksPage() {
               </span>
             )}
           </div>
-          <p className="text-[#6B7280] text-sm mt-2 font-medium">
+          <p className="text-[#6B7280] text-sm mt-1 sm:mt-2 font-medium">
             Showing {tasks.length} {tasks.length === 1 ? 'Task' : 'Tasks'}
           </p>
         </div>
         
-        <div className="flex items-center gap-4">
-          <DateSelector />
-          <button onClick={handleCreateNew} className="h-11 px-5 bg-[#673de6] hover:bg-[#532cc2] text-white font-bold text-sm rounded-md transition-colors flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full md:w-auto">
+          <div className="w-full overflow-x-auto sm:overflow-visible sm:w-auto pb-1 sm:pb-0 hide-scrollbar">
+            <DateSelector />
+          </div>
+          <button onClick={handleCreateNew} className="h-11 px-5 w-full sm:w-auto bg-[#673de6] hover:bg-[#532cc2] text-white font-bold text-sm rounded-md transition-colors flex items-center justify-center gap-2 shrink-0">
             <Plus className="w-5 h-5" />
             New Task
           </button>
