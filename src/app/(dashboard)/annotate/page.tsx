@@ -8,7 +8,9 @@ import { setSelectedImageId } from '@/features/annotations/annotationSlice';
 import { useGetImagesQuery, useUploadImageMutation, useDeleteImageMutation } from '@/features/annotations/annotationApi';
 import { UploadCloud, Image as ImageIcon, X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react';
 import { Spinner } from '@/components/ui/Spinner';
+
 import { API_URL } from '@/config/env';export default function AnnotatePage() {
+  
   const dispatch = useDispatch();
   const selectedImageId = useSelector((state: RootState) => state.annotations.selectedImageId);
   const { data: images = [], isLoading: imagesLoading } = useGetImagesQuery();
