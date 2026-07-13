@@ -10,6 +10,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://task-canvas.vercel.app'),
   title: 'TaskCanvas',
   description: 'TaskCanvas – Task Management & Image Annotation Platform',
   icons: {
