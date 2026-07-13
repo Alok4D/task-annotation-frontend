@@ -103,10 +103,10 @@ export const DateSelector = () => {
         
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-4 py-1.5 rounded hover:bg-[#F4F5F7] text-[#673de6] transition-colors"
+          className="flex items-center gap-2 px-4 py-1.5 rounded hover:bg-[#F4F5F7] text-[#673de6] transition-colors whitespace-nowrap"
         >
-          <CalendarIcon className="w-4 h-4" />
-          <span className="text-sm font-bold tracking-tight">{formatDateForDisplay(selectedDate)}</span>
+          <CalendarIcon className="w-4 h-4 shrink-0" />
+          <span className="text-sm font-bold tracking-tight whitespace-nowrap">{formatDateForDisplay(selectedDate)}</span>
         </button>
 
         <button onClick={handleNextDay} className="p-1 px-2 hover:bg-[#F4F5F7] rounded text-[#6B7280] transition-colors">
