@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { Toolbar, DrawingTool } from './Toolbar';
 import { ZoomIn, ZoomOut } from 'lucide-react';
+import { API_URL } from '@/config/env';
 
 export const Canvas = ({ children }: { children?: React.ReactNode }) => {
   const stageRef = useRef<any>(null);
@@ -16,7 +17,7 @@ export const Canvas = ({ children }: { children?: React.ReactNode }) => {
   const [saveAnnotation, { isLoading: isSaving }] = useSaveAnnotationMutation();
 
   const selectedImage = images.find(img => img.id === selectedImageId);
-  const imageUrl = selectedImage ? (selectedImage.image.startsWith('http') ? selectedImage.image : `http://127.0.0.1:8000${selectedImage.image}`) : '';
+  const imageUrl = selectedImage ? (selectedImage.image.startsWith('http') ? selectedImage.image : `${API_URL}${selectedImage.image}`) : '';
   
   const [image] = useImage(imageUrl, 'anonymous');
   

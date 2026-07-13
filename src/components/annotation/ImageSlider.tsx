@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { setSelectedImageId } from '@/features/annotations/annotationSlice';
 import { Spinner } from '@/components/ui/Spinner';
-
+import { API_URL } from '@/config/env';
 export const ImageSlider = () => {
   const { data: images = [], isLoading } = useGetImagesQuery();
   const selectedImageId = useSelector((state: RootState) => state.annotations.selectedImageId);
@@ -35,7 +35,7 @@ export const ImageSlider = () => {
           }`}
         >
           <img
-            src={img.image.startsWith('http') ? img.image : `http://127.0.0.1:8000${img.image}`}
+            src={img.image.startsWith('http') ? img.image : `${API_URL}${img.image}`}
             alt="Thumbnail"
             className="w-full h-full object-cover"
           />

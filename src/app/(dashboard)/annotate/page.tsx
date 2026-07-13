@@ -8,8 +8,7 @@ import { setSelectedImageId } from '@/features/annotations/annotationSlice';
 import { useGetImagesQuery, useUploadImageMutation, useDeleteImageMutation } from '@/features/annotations/annotationApi';
 import { UploadCloud, Image as ImageIcon, X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react';
 import { Spinner } from '@/components/ui/Spinner';
-
-export default function AnnotatePage() {
+import { API_URL } from '@/config/env';export default function AnnotatePage() {
   const dispatch = useDispatch();
   const selectedImageId = useSelector((state: RootState) => state.annotations.selectedImageId);
   const { data: images = [], isLoading: imagesLoading } = useGetImagesQuery();
@@ -83,7 +82,7 @@ export default function AnnotatePage() {
                 >
                   <div className="h-28 w-full relative rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
                     <img 
-                      src={img.image.startsWith('http') ? img.image : `http://127.0.0.1:8000${img.image}`} 
+                      src={img.image.startsWith('http') ? img.image : `${API_URL}${img.image}`} 
                       alt="Thumbnail" 
                       className="w-full h-full object-cover"
                     />
