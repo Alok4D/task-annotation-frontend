@@ -57,16 +57,16 @@ export default function AnnotatePage() {
           <div className="p-5 border-b border-gray-100 flex flex-col gap-4">
             
             {/* Pagination moved here */}
-            <div className="flex items-center justify-between bg-gray-50 rounded-xl px-3 py-2 border border-gray-200">
-               <button onClick={handlePrev} disabled={selectedIndex <= 0} className="p-1 hover:bg-white hover:shadow-sm rounded-lg disabled:opacity-30 transition-all"><ChevronLeft className="w-4 h-4 text-gray-600"/></button>
+            <div className="flex items-center justify-between bg-gray-50 rounded-md px-3 py-2 border border-gray-200">
+               <button onClick={handlePrev} disabled={selectedIndex <= 0} className="p-1 hover:bg-white hover:shadow-sm rounded-md disabled:opacity-30 transition-all"><ChevronLeft className="w-4 h-4 text-gray-600"/></button>
                <span className="text-sm font-bold text-gray-700 px-2">{images.length > 0 ? `Image ${selectedIndex + 1} of ${images.length}` : '0 Images'}</span>
-               <button onClick={handleNext} disabled={selectedIndex >= images.length - 1 || images.length === 0} className="p-1 hover:bg-white hover:shadow-sm rounded-lg disabled:opacity-30 transition-all"><ChevronRight className="w-4 h-4 text-gray-600"/></button>
+               <button onClick={handleNext} disabled={selectedIndex >= images.length - 1 || images.length === 0} className="p-1 hover:bg-white hover:shadow-sm rounded-md disabled:opacity-30 transition-all"><ChevronRight className="w-4 h-4 text-gray-600"/></button>
             </div>
             <input type="file" accept="image/*" multiple onChange={handleFileChange} className="hidden" ref={fileInputRef} />
             <button 
               onClick={() => fileInputRef.current?.click()}
               disabled={isUploading}
-              className="w-full bg-[#673de6] hover:bg-[#532cc2] text-white px-4 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-70 active:scale-95 shadow-md shadow-[#673de6]/20"
+              className="w-full bg-[#673de6] hover:bg-[#532cc2] text-white px-4 py-3 rounded-md text-sm font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-70 active:scale-95 shadow-md shadow-[#673de6]/20"
             >
               {isUploading ? <Spinner className="w-4 h-4 text-white" /> : <UploadCloud className="w-4 h-4" />}
               {isUploading ? 'Uploading...' : 'Upload Images'}

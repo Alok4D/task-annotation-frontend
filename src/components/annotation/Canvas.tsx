@@ -257,7 +257,7 @@ export const Canvas = ({ children }: { children?: React.ReactNode }) => {
             <button 
               onClick={handleSave} 
               disabled={points.length < 3 || isSaving} 
-              className="w-full flex items-center justify-center gap-2 bg-[#673de6] hover:bg-[#532cc2] text-white py-3.5 rounded-xl text-sm font-bold transition-all disabled:opacity-50 disabled:hover:bg-[#673de6] shadow-lg shadow-[#673de6]/20 active:scale-95"
+              className="w-full flex items-center justify-center gap-2 bg-[#673de6] hover:bg-[#532cc2] text-white py-3.5 rounded-md text-sm font-bold transition-all disabled:opacity-50 disabled:hover:bg-[#673de6] shadow-lg shadow-[#673de6]/20 active:scale-95"
             >
               Save Annotations
             </button>
