@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { useRegisterMutation } from '@/features/auth/authApi';
+import { useRegisterMutation, useLoginMutation } from '@/features/auth/authApi';
 import { setCredentials } from '@/features/auth/authSlice';
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
@@ -27,7 +27,9 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 export default function RegisterPage() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [registerUser, { isLoading }] = useRegisterMutation();
+  const [registerUser, { isLoading: isRegistering }] = useRegisterMutation();
+  const [loginUser, { isLoading: isLoggingIn }] = useLoginMutation();
+  const isLoading = isRegistering || isLoggingIn;
   const [errorMsg, setErrorMsg] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -52,17 +54,22 @@ export default function RegisterPage() {
   const onSubmit = async (data: RegisterFormValues) => {
     setErrorMsg('');
     try {
-      const response = await registerUser({
+      await registerUser({
         name: data.name,
         email: data.email,
         password: data.password,
         password_confirm: data.password_confirm,
       }).unwrap();
 
+      const loginResponse = await loginUser({
+        email: data.email,
+        password: data.password,
+      }).unwrap();
+
       dispatch(
         setCredentials({
-          user: response.user || { id: 0, email: data.email, name: data.name, created_at: '' },
-          token: response.access,
+          user: loginResponse.user || { id: 0, email: data.email, name: data.name, created_at: '' },
+          token: loginResponse.access,
         })
       );
       router.push('/tasks');
