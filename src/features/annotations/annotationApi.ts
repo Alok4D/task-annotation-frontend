@@ -37,6 +37,29 @@ export const annotationApi = apiWithTags.injectEndpoints({
       }),
       invalidatesTags: ['Annotation'],
     }),
+    updateAnnotation: builder.mutation<Annotation, { id: number; body: Partial<Annotation> }>({
+      query: ({ id, body }) => ({
+        url: `annotations/annotations/${id}/`,
+        method: 'PATCH',
+        body,
+      }),
+      async onQueryStarted({ id, body }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          annotationApi.util.updateQueryData('getAnnotations', undefined, (draft) => {
+            const index = draft.findIndex((a) => a.id === id);
+            if (index !== -1) {
+              Object.assign(draft[index], body);
+            }
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
+      invalidatesTags: ['Annotation'],
+    }),
     deleteAnnotation: builder.mutation<void, number>({
       query: (id) => ({
         url: `annotations/annotations/${id}/`,
@@ -52,6 +75,7 @@ export const {
   useUploadImageMutation,
   useGetAnnotationsQuery,
   useSaveAnnotationMutation,
+  useUpdateAnnotationMutation,
   useDeleteAnnotationMutation,
   useDeleteImageMutation,
 } = annotationApi;
