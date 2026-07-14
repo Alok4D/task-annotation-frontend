@@ -6,6 +6,10 @@
 ## 🔗 Live Links
 - **Live Frontend**: https://taskcanvas-app.vercel.app
 
+<div align="center">
+  <img src="public/annotation-page-image.png" alt="TaskCanvas App Preview" width="100%" />
+</div>
+
 ## 🔑 Demo Login Credentials
 
 | 👑 Demo User Credentials |
