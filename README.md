@@ -19,9 +19,19 @@
 - **Full CRUD Support**: Seamlessly create, edit, update statuses, and delete tasks.
 
 ### 2. Advanced Image Annotation
-- **Interactive Canvas**: Utilize a powerful `react-konva` canvas to draw, view, and interact with polygons directly on top of your images.
-- **Image Uploads**: Upload images easily and manage them within the application.
-- **Dynamic Polygon Drawing**: Click to add points and create custom shapes. The polygon automatically closes to form a complete annotation.
+- **Interactive Workspace (`annotate/page.tsx`)**: A fully responsive annotation interface featuring a recent images sidebar, image pagination, and a dynamic mobile layout using `createPortal`.
+- **Canvas Engine (`Canvas.tsx`)**: Powered by `react-konva` (`Stage`, `Layer`, `Image`, `Group`, `Line`, `Circle`) and `use-image` to provide a robust drawing and rendering engine.
+- **Multi-Tool Support**:
+  - **Polygon Drawing**: Click to add coordinate points, dynamically connecting lines that automatically close into a filled shape.
+  - **Pen & Highlighter Tools**: Supports free-hand drawing with various styles (Solid, Dashed, Dotted) and types (Highlighter, Marker, Pencil, Ballpen) using advanced `globalCompositeOperation` blending.
+  - **Eraser Tool**: Precisely erase parts of drawings using `destination-out` blending modes.
+- **Advanced Interactions**:
+  - **Select & Transform**: Utilize `react-konva`'s `Transformer` node to select, resize, and modify saved annotations.
+  - **Pan & Zoom**: Navigate large images effortlessly. Supports middle-click panning, scroll-wheel zooming (calculated dynamically via `handleWheel`), and floating zoom control buttons.
+- **State & API Integration**: 
+  - **Redux Toolkit (`useSelector`, `useDispatch`)** efficiently manages the `selectedImageId` across the application.
+  - **RTK Query Mutations & Queries**: Seamlessly handles backend communication using custom hooks (`useGetImagesQuery`, `useUploadImageMutation`, `useGetAnnotationsQuery`, `useSaveAnnotationMutation`, `useUpdateAnnotationMutation`, `useDeleteAnnotationMutation`).
+- **Export Capabilities**: A dedicated `handleDownload` function allows users to export their annotated workspace directly to a high-resolution `.png` file using `toDataURL`.
 
 ### 3. Authentication & Security
 - **JWT-Based Login**: Secure user authentication and session management.
