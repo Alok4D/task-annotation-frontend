@@ -1,72 +1,46 @@
-# Task Annotation Frontend
+# TaskFusion - Frontend (The Hero's Interface)
 
-A modern, high-performance web application designed for task management and image annotation. Built with Next.js and React 19, it provides a seamless user experience for managing tasks and performing detailed image annotations using a canvas-based interface.
+Welcome to the frontend of TaskFusion, an epic 2-in-1 web app combining a Kanban task board with an advanced image annotation tool! Built with React, Next.js, and Tailwind CSS.
 
-## 🚀 Key Features
+## 🐉 The Villains Faced (And How They Were Defeated!)
+Every great anime arc has formidable villains. Here are the ones I faced during this saga:
+1. **The State Management Hydra (Drag-and-Drop):** Implementing drag-and-drop while syncing state efficiently across components threatened to create infinite render loops. Armed with Redux Toolkit and `dnd-kit`, I banished the Hydra by keeping the data flow unidirectional and separating UI logic from state logic.
+2. **The Canvas Phantom (Polygon Annotations):** Drawing polygons on uploaded images, handling scaling, and closing shapes dynamically was a daunting phantom. By utilizing `react-konva` and diving deep into the Konva.js documentation (with a little help from AI sidekicks to calculate coordinates), the Phantom was sealed within the `<Canvas />` component!
+3. **The Date-Syncing Trickster:** Making sure the Kanban board only displayed tasks for the selected date, and updating this filter seamlessly, was tricky. A robust context provider proved to be the ultimate weapon against this trickster.
 
-### 🔐 Authentication System
-- Secure user registration and login flows.
-- State persistence and protected routing.
-- Client-side form validation using **Zod** and **React Hook Form**.
-
-### 📋 Task Management
-- Intuitive drag-and-drop task organization using **@dnd-kit**.
-- Centralized task state management powered by **Redux Toolkit**.
-- Real-time UI updates for task status changes.
-
-### 🖌️ Image Annotation Tool
-- **Professional Figma-style Workspace:** A sleek, unified interface for all annotation tasks.
-- **Advanced Polygon Drawing:** Draw custom shapes with adjustable stroke sizes (thickness) and a built-in color palette.
-- **Interactive Canvas Controls:** Zoom in/out using the mouse wheel, and seamlessly navigate using the Hand Tool (Pan).
-- **Floating Thumbnail Dock:** Easily switch between uploaded images using a responsive bottom dock.
-- **Export & Delete:** Download annotated images directly to your local device. Delete specific drawn polygons or completely remove uploaded images as needed.
-- **High-performance Drawing:** Powered by **Konva** and **React-Konva** for a smooth, lag-free experience.
-
-### 🎨 Modern UI/UX
-- Responsive, clean, and highly customizable design built with **Tailwind CSS v4**.
-- Intuitive and beautiful iconography via **Lucide React**.
-- Reusable UI components integrated with `clsx` and `tailwind-merge` for dynamic styling.
-
-## 🛠️ Technology Stack
-
-- **Framework:** Next.js 16 (App Router)
-- **Library:** React 19
+## 🚀 Tech Stack
+- **Framework:** Next.js 16 (React 19)
+- **Language:** TypeScript 
 - **Styling:** Tailwind CSS v4
-- **State Management:** Redux Toolkit (RTK)
-- **Canvas/Drawing:** Konva & React-Konva
-- **Drag & Drop:** dnd-kit
-- **Form Handling:** React Hook Form & Zod
-- **Icons:** Lucide React
+- **State Management:** Redux Toolkit / React Context
+- **Drag & Drop:** `@dnd-kit`
+- **Canvas:** `react-konva`
 
-## 📦 Getting Started
+## ⚙️ Requirements
+- **Node.js:** v18.x or v20.x
+- **Python:** 3.12+ (For Backend)
 
-First, clone the repository and install the dependencies:
+## 🏃‍♂️ How to Run Locally (The Training Arc)
+1. **Clone the repository:**
+   ```bash
+   git clone <frontend-repo-url>
+   cd task-annotation-frontend
+   ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) to see the magic.
 
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
+## 🔗 Links & Credentials
+- **Frontend Repo:** [Insert Github Link]
+- **Backend Repo:** [Insert Github Link]
+- **Live Hosted App:** [Insert Hosted Link]
+- **Demo User Email:** demo@taskfusion.com
+- **Demo User Password:** DemoPass123!
 
-Then, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## 📂 Project Structure
-
-- `src/app`: Next.js App Router pages and layouts.
-- `src/features`: Feature-based modular code (Authentication, Tasks, Annotations).
-- `src/components`: Reusable UI components.
-- `src/store`: Redux Toolkit store configuration.
-- `src/types`: TypeScript type definitions.
-- `src/utils`: Helper functions and utilities.
+"Believe in the code that believes in you!" 🕶️🔥
