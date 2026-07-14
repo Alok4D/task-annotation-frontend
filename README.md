@@ -19,19 +19,16 @@
 - **Full CRUD Support**: Seamlessly create, edit, update statuses, and delete tasks.
 
 ### 2. Advanced Image Annotation
-- **Interactive Workspace (`annotate/page.tsx`)**: A fully responsive annotation interface featuring a recent images sidebar, image pagination, and a dynamic mobile layout using `createPortal`.
-- **Canvas Engine (`Canvas.tsx`)**: Powered by `react-konva` (`Stage`, `Layer`, `Image`, `Group`, `Line`, `Circle`) and `use-image` to provide a robust drawing and rendering engine.
-- **Multi-Tool Support**:
-  - **Polygon Drawing**: Click to add coordinate points, dynamically connecting lines that automatically close into a filled shape.
-  - **Pen & Highlighter Tools**: Supports free-hand drawing with various styles (Solid, Dashed, Dotted) and types (Highlighter, Marker, Pencil, Ballpen) using advanced `globalCompositeOperation` blending.
-  - **Eraser Tool**: Precisely erase parts of drawings using `destination-out` blending modes.
-- **Advanced Interactions**:
-  - **Select & Transform**: Utilize `react-konva`'s `Transformer` node to select, resize, and modify saved annotations.
-  - **Pan & Zoom**: Navigate large images effortlessly. Supports middle-click panning, scroll-wheel zooming (calculated dynamically via `handleWheel`), and floating zoom control buttons.
-- **State & API Integration**: 
-  - **Redux Toolkit (`useSelector`, `useDispatch`)** efficiently manages the `selectedImageId` across the application.
-  - **RTK Query Mutations & Queries**: Seamlessly handles backend communication using custom hooks (`useGetImagesQuery`, `useUploadImageMutation`, `useGetAnnotationsQuery`, `useSaveAnnotationMutation`, `useUpdateAnnotationMutation`, `useDeleteAnnotationMutation`).
-- **Export Capabilities**: A dedicated `handleDownload` function allows users to export their annotated workspace directly to a high-resolution `.png` file using `toDataURL`.
+- **Interactive Workspace**: A clean, responsive interface featuring a "Recent Images" sidebar and easy navigation arrows to quickly switch between your uploaded files.
+- **Multi-Tool Drawing Engine**: 
+  - **Polygon Tool**: Click to add points and easily draw custom, closed shapes around specific objects in your images.
+  - **Pen & Highlighter Tools**: Free-hand drawing support featuring multiple brush types (Highlighter, Marker, Pencil, Ballpen) and line styles (Solid, Dashed, Dotted) for detailed markups.
+  - **Eraser Tool**: A precise eraser to clean up mistakes without affecting the underlying image.
+- **Advanced Canvas Interactions**:
+  - **Select & Edit**: Click on any previously drawn annotation to select it, then freely resize, move, or adjust individual points.
+  - **Pan & Zoom**: Easily navigate large, high-resolution images using scroll-wheel zooming or the floating zoom controls. Hold middle-click to pan around the canvas.
+- **Cloud Sync**: All annotations and images are instantly saved and synced with the database, ensuring you never lose your progress.
+- **Export Capabilities**: Download your fully annotated images directly to your device as high-resolution PNG files with a single click.
 
 ### 3. Authentication & Security
 - **JWT-Based Login**: Secure user authentication and session management.
