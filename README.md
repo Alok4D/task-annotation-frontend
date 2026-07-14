@@ -4,9 +4,6 @@
 
 ## 🔗 Live Links
 - **Live Frontend**: https://taskcanvas-app.vercel.app
-- **Live Backend**: https://task-annotation-backend-3vyn.onrender.com
-- **Frontend Repo**: https://github.com/Alok4D/task-annotation-frontend
-- **Backend Repo**: https://github.com/Alok4D/task-annotation-backend
 
 ## 🔑 Demo Login Credentials
 
