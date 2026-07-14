@@ -7,7 +7,7 @@
 
 ## 🔑 Demo Login Credentials
 
-| 👑 Admin Account |
+| 👑 Demo User Credentials |
 | :--- |
 | **Email:** `admin@gmail.com`<br>**Pass:** `admin123456` |
 
