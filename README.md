@@ -1,6 +1,7 @@
 # TaskCanvas App
 
-**Welcome to TaskCanvas** — a powerful 2-in-1 web application combining an intuitive Kanban task board with an advanced Image Annotation tool. Easily manage your daily tasks, organize your workflow by date, and annotate images with custom polygons all in one place.
+**Welcome to TaskCanvas** — a modern full-stack application that combines a powerful **Kanban Task Management System** with an intuitive **Image Annotation Tool**. Organize your daily workflow, manage tasks by date, and create precise polygon annotations on images through a clean, responsive, and user-friendly interface.
+
 
 ## 🔗 Live Links
 - **Live Frontend**: https://taskcanvas-app.vercel.app
