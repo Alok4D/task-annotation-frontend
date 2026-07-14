@@ -1,6 +1,6 @@
-# TaskFusion — Frontend Application
+# TaskCanvas App
 
-**Welcome to TaskFusion** — a powerful 2-in-1 web application combining an intuitive Kanban task board with an advanced Image Annotation tool. Easily manage your daily tasks, organize your workflow by date, and annotate images with custom polygons all in one place.
+**Welcome to TaskCanvas** — a powerful 2-in-1 web application combining an intuitive Kanban task board with an advanced Image Annotation tool. Easily manage your daily tasks, organize your workflow by date, and annotate images with custom polygons all in one place.
 
 ## 🔗 Live Links
 - **Live Frontend**: https://taskcanvas-app.vercel.app
