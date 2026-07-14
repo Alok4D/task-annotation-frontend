@@ -5,6 +5,7 @@
 
 ## 🔗 Live Links
 - **Live Frontend**: https://taskcanvas-app.vercel.app
+- **Backend Repo**: https://github.com/Alok4D/task-annotation-backend
 
 <div align="center">
   <img src="public/annotation-page-image.png" alt="TaskCanvas App Preview" width="100%" />
