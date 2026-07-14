@@ -39,13 +39,16 @@
 ## 🛠️ Tech Stack
 - **Next.js 16 (React 19)** (UI Framework & Routing)
 - **TypeScript** (Type Safety)
-- **Redux Toolkit** (State Management)
+- **Redux Toolkit** (State Management & API Data Fetching)
 - **Tailwind CSS v4** (Styling)
 - **@dnd-kit** (Drag & Drop functionality)
 - **React-Konva** (Canvas & Polygon Rendering)
+- **use-image** (Canvas Image Loading hook)
 - **React Hook Form** (Form Handling)
-- **Zod** (Schema Validation)
+- **Zod & @hookform/resolvers** (Schema Validation)
 - **Lucide React** (Icons)
+- **clsx & tailwind-merge** (Dynamic Class Utilities)
+- **ESLint** (Code Linting)
 
 ---
 
