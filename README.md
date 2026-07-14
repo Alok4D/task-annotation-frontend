@@ -35,10 +35,6 @@
 - **JWT-Based Login**: Secure user authentication and session management.
 - **Protected Routes**: Ensuring only authenticated users can access the application's core features.
 
-### 4. Modern UI & UX
-- **Tailwind CSS Styling**: Beautiful, responsive, and modern user interface styled with Tailwind CSS v4.
-- **Form Validation**: Robust client-side validation using `React Hook Form` and `Zod`.
-- **Smooth State Management**: Leverages Redux Toolkit to handle complex application states effortlessly.
 
 ## 🛠️ Tech Stack
 - **Next.js 16 (React 19)** (UI Framework & Routing)
